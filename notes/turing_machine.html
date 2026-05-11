@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图灵机 - 麦田里的阅读者</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-left">
+      <div class="nav-icon">
+        <img src="../images/icon.jpg" alt="站点图标">
+      </div>
+      <a href="../index.html" class="nav-title">麦田里的阅读者</a>
+    </div>
+    <div class="nav-links">
+      <a href="../notes/index.html">笔记</a>
+      <a href="../reports/index.html">报告</a>
+      <a href="../poems/index.html">诗歌</a>
+      <a href="../tags.html">标签</a>
+    </div>
+  </nav>
+
+  <main class="container article">
+    <a href="index.html" class="back-link">← 返回列表</a>
+    <h1 class="article-title">图灵机</h1>
+    <div class="article-meta">
+      <span class="article-date">2026-05-11</span>
+      <div class="article-tags">
+        <a href="../tags.html?tag=%E8%AE%A4%E7%9F%A5" class="tag-item small">计算机科学</a>
+        <a href="../tags.html?tag=人工智能" class="tag-item small">人工智能</a>
+      </div>
+    </div>
+
+    <!-- 摘要区域 -->
+    <section class="summary">
+      <h2>摘要</h2>
+      <p>图灵机作为现代计算机架构的先驱，是对于人工智能的早期探索的里程碑。深入理解图灵机有利于把握人工智能思想的起源。
+        本文基于图灵著名的论文——<i>On Computable Numbers, 
+          with an Application to the Entscheidungsproblem</i><sup><a href="#footnote1">1</a></sup> (Turing, 1936)——详细拆解了图灵机的设计。为理解图灵机提供了一份中文版的说明书。</p>
+    </section>
+    <!-- 正文 -->
+    <article class="content">
+      <h2>1. 计算机器</h2>
+      <p><b>计算机器(<i>computing machine</i>)</b>是模拟人的计算行为的机器。图灵并没有真正在物理上设计出这样的机器，但却构想出了这种机器的所有逻辑。</p>
+      <p>计算机器包含以下设计：
+      <ul>
+        <li> <b>纸带(<i>tape</i>)</b>：首先计算机器有一个可以读写的纸带，纸带被分隔成一个个的<b>格子(<i>square</i>)</b>，这些格子有2种类型：</li>
+        <ul>
+          <li> <b>F-格(F-<i>square</i>)</b>：写入数字，F-格中所有的数字组成最终的计算结果</li>
+          <li> <b>E-格(E-<i>square</i>)</b>：写入可能会被擦除的辅助字符</li>
+        </ul>
+        <li> <b>字符(<i>symbol</i>)</b>：每个格子只能写入一个字符，包括数字和辅助字符；</li>
+        <li> <b>扫描符(<i>scanned symbol</i>)</b>：机器每次只能扫描纸带中的一个格子，被扫描的格子称为<b>扫描格(<i>scanned square</i>)</b>，扫描格中的字符称为扫描符</li>
+        <li>
+          <b>配置(<i>m-configurations</i>)</b>：机器只能处理有限的条件，比如$q_1,q_2,\cdots,q_n$，这些条件称为配置。配置规定了机器可能的<b>操作(operations)</b>，包括：
+        </li>
+        <ul>
+          <li> 在扫描格中写入新字符</li>
+          <li> 擦除扫描格中的字符</li>
+          <li> 变换扫描格(左移、右移)</li>
+        </ul>
+        <li> <b>格局(<i>configuration</i>)</b>：配置和扫描符的组合称为格局，配置和扫描符一起决定了机器的操作和新配置。</li>
+        <li> <b>完全格局(<i>complete configuration</i>)</b>：在某个时刻，纸带的完全状态：</li>
+        <ul>
+          <li> 当前的扫描格</li>
+          <li> 纸带上所有的字符</li>
+          <li> 当前的配置</li>
+        </ul>
+        <li> <b>行动(<i>moves</i>)</b>：机器从一个完全格局转换到另一个完全格局</li>
+      </ul>
+      </p>
+      <hr>
+      <p>
+        上述的这种计算机器有两种可能的类型：
+      <ul>
+        <li> <b>循环机(<i>circular machine</i>)</b>：在达到某个配置后，不能够再有行动；或者即使有行动，也不能再写入数字</li>
+        <li> <b>非循环机(<i>circle-free machine</i>)</b>：可以一直写入数字</li>
+      </ul>
+      </p>
+      <h2>2. 计算机器示例</h2>
+      <p>
+        下面的示例中，计算机器将用<b>配置表</b>来定义。配置表包含4列：
+      <ol>
+        <li>配置：即当前配置，用哥特式德文字母表示，如$\frak b, c , k, q, f\cdots$</li>
+        <li>扫描符：None代表空格；如果什么都没有表示无论扫描符是什么都将执行操作</li>
+        <li>操作：当前配置对应的机器操作</li>
+        <ul>
+          <li>P表示写入，后跟<b>写入字符</b>，比如P0表示写入字符0</li>
+          <li>R表示右移</li>
+          <li>L表示左移</li>
+          <li>E表示擦除</li>
+        </ul>
+        <li>新配置：表示执行操作之后机器转入的下一个配置</li>
+      </ol>
+      </p>
+      <p>注意：下面计算数字的例子中图灵机只实现了计算小数部分，省略了前面的整数部分和小数点。</p>
+      <h3>2.1 计算1/3</h3>
+      <p>$\frac{1}{3}$的二进制为$0.01010101...$</p>
+      <table>
+        <thead>
+          <tr>
+            <th>配置</th>
+            <th>扫描符</th>
+            <th>操作</th>
+            <th>新配置</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3">$\frak{b}$</td>
+            <td>None</td>
+            <td>P0</td>
+            <td rowspan="3">$\frak{b}$</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>R,R,P1</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>R,R,P0</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>2.2 计算1/4</h3>
+      <p>$\frac{1}{4}$的二进制为$0.01000...$</p>
+      <table>
+        <thead>
+          <tr>
+            <th>配置</th>
+            <th>扫描符</th>
+            <th>操作</th>
+            <th>新配置</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3">$\frak{b}$</td>
+            <td>None</td>
+            <td>P0</td>
+            <td>$\frak{b}$</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>R,R,P1</td>
+            <td>$\frak{b}$</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>R,R,P0</td>
+            <td>$\frak{c}$</td>
+          </tr>
+          <tr>
+            <td>$\frak{c}$</td>
+            <td>0</td>
+            <td>R,R,P0</td>
+            <td>$\frak{c}$</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>2.3 计算无理数(无限不循环小数)</h3>
+      <p>$0.0010110111011110...$每2个0之间的1的数量递增</p>
+      <table>
+        <thead>
+          <tr>
+            <th>配置</th>
+            <th>扫描符</th>
+            <th>操作</th>
+            <th>新配置</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$\frak{b}$</td>
+            <td></td>
+            <td>P@,R,P@,R,P0,R,R,P0,L,L</td>
+            <td>$\frak{o}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{o}$</td>
+            <td>1</td>
+            <td>R,Px,L,L,L,P1</td>
+            <td>$\frak{o}$</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td></td>
+            <td>$\frak{q}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{q}$</td>
+            <td>any(0 or 1)</td>
+            <td>R,R</td>
+            <td>$\frak{q}$</td>
+          </tr>
+          <tr>
+            <td>none</td>
+            <td>P1,L</td>
+            <td>$\frak{p}$</td>
+          </tr>
+          <tr>
+            <td rowspan="3">$\frak{p}$</td>
+            <td>x</td>
+            <td>E,R</td>
+            <td>$\frak{q}$</td>
+          </tr>
+          <tr>
+            <td>@</td>
+            <td>R</td>
+            <td>$\frak{f}$</td>
+          </tr>
+          <tr>
+            <td>none</td>
+            <td>L,L</td>
+            <td>$\frak{p}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{f}$</td>
+            <td>any(0 or 1)</td>
+            <td>R,R</td>
+            <td>$\frak{f}$</td>
+          </tr>
+          <tr>
+            <td>none</td>
+            <td>P0,L,L</td>
+            <td>$\frak{o}$</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>该机器在计算过程中的完全格局可以表示如下：</p>
+      <p>
+        $$
+        \begin{aligned}
+        & \mathfrak{\textcolor{red}b}\kern{0.5em}: \\
+        &@\kern{0.5em}@\mathfrak{\textcolor{red}o}0\kern{1.5em}0 :\\
+        &@\kern{0.5em}@\mathfrak{\textcolor{red}q}0\kern{1.5em}0 :\\
+        &@\kern{0.5em}@\kern{0.5em}0\kern{1em}\mathfrak{\textcolor{red}q}0:\\
+        &@\kern{0.5em}@\kern{0.5em}0\kern{1.5em}0\kern{1em}\mathfrak{\textcolor{red}q}\kern{0.5em}: \\
+        &@\kern{0.5em}@\kern{0.5em}0\kern{1.5em}0\mathfrak{\textcolor{red}p}\kern{1em}1:\\
+        &@\kern{0.5em}@\kern{0.5em}0\mathfrak{\textcolor{red}p}\kern{1em}0\kern{1.5em}1:\\
+        &@\mathfrak{\textcolor{red}p}@\kern{0.5em}0\kern{1.5em}0\kern{1.5em}1:\\
+        &@\kern{0.5em}@\,\mathfrak{\textcolor{red}f}0\kern{1.5em}0\kern{1.5em}1: \\
+        &@\kern{0.5em}@\kern{0.5em}0\,\mathfrak{\textcolor{red}f}\kern{1em}0\kern{1.5em}1:\\
+        &@\kern{0.5em}@\kern{0.5em}0\kern{1.5em}0\,\mathfrak{\textcolor{red}f}\kern{1em}1:\\
+        &@\kern{0.5em}@\kern{0.5em}0\kern{1.5em}0\kern{1.5em}1\kern{1em}\mathfrak{\textcolor{red}f}\kern{0.5em}:\\
+        &@\kern{0.5em}@\kern{0.5em}0\kern{1.5em}0\kern{1em}\mathfrak{\textcolor{red}o}1\kern{1.5em}0:\\
+        &@\kern{0.5em}@\kern{0.5em}0\kern{1em}\mathfrak{\textcolor{red}o}0\kern{1.5em}1\kern{0.5em} x\kern{0.5em}0:\\
+        &@\kern{0.5em}@\kern{0.5em}0\kern{1em}\mathfrak{\textcolor{red}q}0\kern{1.5em}1\kern{0.5em}x\kern{0.5em}0:\\
+        &@\kern{0.5em}@\kern{0.5em}0\kern{1.5em}0\kern{1em}\mathfrak{\textcolor{red}q}1\kern{0.5em}x\kern{0.5em}0:\\
+        &@\kern{0.5em}@\kern{0.5em}0\kern{1.5em}0\kern{1.5em}1\kern{0.5em}x\mathfrak{\textcolor{red}q}0: \\
+        &@\kern{0.5em}@\kern{0.5em}0\kern{1.5em}0\kern{1.5em}1\kern{0.5em}x\kern{0.5em}0\kern{1em}\mathfrak{\textcolor{red}q}\kern{0.5em}:\\
+        &@\kern{0.5em}@\kern{0.5em}0\kern{1.5em}0\kern{1.5em}1\kern{0.5em}x\kern{0.5em}0\mathfrak{\textcolor{red}p}\kern{1em}1:\\
+        \end{aligned}
+        $$
+      </p>
+      <ul>
+        <li>完全格局中的配置放在扫描符的左边；</li>
+        <li>每个完全格局以":"结束</li>
+      </ul>
+      <p>注意：最后一个完全格局中的$x$是E-格中的辅助字符，用来<b>标记</b>其左边的数字$1$</p>
+
+      <h3>2.4 二进制运算</h3>
+      <p><i>这部分并未出现在图灵的论文中，是Charles Petzold所著的《图灵的秘密：他的生平、思想及论文解读》
+        <sup><a href="#footnote2">2</a></sup>(杨卫东 等, 2012)一书中补充的例子。如果只想了解图灵最初的设计，可以跳过。</i></p>
+      <details>
+        <summary>
+          二进制加法和开方运算的图灵机实现(点击展开)
+        </summary>
+        <p>为了更易读，这部分的配置用英语词汇来命名。</p>
+        <h4>2.4.1 二进制加法</h4>
+        <p>从0开始，每次加1，向左进位。（这是本文中唯一一个向左扩展纸带的图灵机）</p>
+        <table>
+          <thead>
+            <tr>
+              <th>配置</th>
+              <th>扫描符</th>
+              <th>操作</th>
+              <th>新配置</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>begin</td>
+              <td></td>
+              <td>P0</td>
+              <td>increment</td>
+            </tr>
+            <tr>
+              <td rowspan="3">increment</td>
+              <td>0</td>
+              <td>P1</td>
+              <td>rewind</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>P0,L</td>
+              <td>increment</td>
+            </tr>
+            <tr>
+              <td>none</td>
+              <td>P1</td>
+              <td>rewind</td>
+            </tr>
+            <tr>
+              <td rowspan="2">rewind</td>
+              <td>none</td>
+              <td>L</td>
+              <td>increment</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>R</td>
+              <td>rewind</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>2.4.2 计算$\sqrt{2}$的二进制</h4>
+
+        <p>这里使用乘法运算来推断$\sqrt{2}$的二进制。</p>
+
+        <p>
+          假设已经求出前3位是1.01，那么具体步骤如下：
+        <ol>
+          <li>假设第4位是1，这一位就是要求的位，称之为"<b>未知位</b>"</li>
+          <li>将加入未知位后的数自乘，即$1.011\times1.011$；</li>
+          <li>如果自乘结果有$2\times4-1=7$位，那么假设是成立的，未知位就是1</li>
+          <li>如果自乘结果有$2\times4=8$位，那么假设是不成立的，未知位为0</li>
+        </ol>
+        </p>
+
+        <p>其中原理来自乘法运算的一个规律：$n$位的二进制数自乘，如果不需要进位，那么其结果就只有$2n-1$位；如果结果有$2n$位，那么就要进位，整体结果就会超过2。</p>
+
+        <p>
+          到这里，整体来看，实现算法不算太难。而且单位二进制的乘法甚至比加法还简单一点，只有2种可能的结果(0，1)。但是多位数自乘就复杂很多。
+          我们手算乘法的时候，要将第二个乘数的每一位分别与第一个乘数相乘，然后计算相乘结果的和。$n$位数和$m$位相乘，就要做$n\times
+          m$次的单位乘法。这些乘法的结果要按位数排列，最终还要相加得到最后的乘积。所以，多位乘法里面包含了加法。
+        </p>
+
+        <p>
+          $$
+          \begin{aligned}
+          &1011 \\
+          \times &1011 \\
+          ---&--- \\
+          &1011 \\
+          1&011 \\
+          00&00 \\
+          101&1 \\
+          ---&--- \\
+          111&1001
+          \end{aligned}
+          $$
+        </p>
+
+        <p>
+          Charles的方案是：
+        <ol>
+          <li>用x和y来标记每次<b>单位相乘</b>的两个<b>数字位</b>，因为这里是自乘，所以单位相乘的有时是同一个数字位，这时候用z来标记该数字位。</li>
+          <li>y标记先不动，x标记从低位往高位移动，这样依次计算x和y的单位相乘，直到x到达最高位，完成<b>一轮单位相乘</b>之后，再将y往前移一位，x重置到最低位，进行下一轮单位相乘。</li>
+          <li>
+            用3种符号来记录乘法过程中产生的和的结果，称之为<b>过程和</b>：
+            <ul>
+              <li>加和前，r表示0，u表示1，这两个就是过程和的<b>初始符号</b>；</li>
+              <li>与单位相乘的结果相加后，s表示0，v表示1</li>
+              <li>该位结果已确定、不再参与加和运算后，t表示0，w表示1</li>
+            </ul>
+          </li>
+          <li>
+            过程和低位在左边、高位在右边(因为纸带是从左至右读写的，这样方便查找过程和中的位)，这样每次向过程和中加入单位相乘的结果时，只用对最左边的r或u进行进行加和就行了。因为其他符号都代表已经加和过了或者不用再参与运算了。如此便避免了混乱。
+          </li>
+          <li>
+            每一轮<b>自乘运算</b>(即假设未知位后，将假设数自乘，确定结果是否需要进位)之前，根据当前的位数$n$(包括未知位)，标记$2n-1$位的初始过程和(都为r)。自乘运算过程中，如果过程和需要用到这$2n-1$位之外的格子，那么就代表需要进位，也就是假设不成立，未知位为0。
+          </li>
+        </ol>
+        这个过程比较复杂，我编写了一个Python程序<a href="https://github.com/TimLee135/turing">Turing
+          Machine</a>来实现。该程序会将每次行动的完全格局打印在终端，便于理解整个计算过程。示例如下：
+        </p>
+        <center><img src="notes-images/turing-python.png" title="Python模拟图灵机"></center>
+        <br>
+
+        <table>
+          <caption>计算$\sqrt{2}$的二进制的图灵机的格局表</caption>
+          <thead>
+            <tr>
+              <th>配置</th>
+              <th>扫描符</th>
+              <th>操作</th>
+              <th>新配置</th>
+              <th>备注</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>begin</td>
+              <td>None</td>
+              <td>P@,R,P1</td>
+              <td>new</td>
+              <td>在开头2格写入@和1(第1位不用计算就可以确定是1)</td>
+            </tr>
+            <tr>
+              <td rowspan="2">new</td>
+              <td>@</td>
+              <td>R</td>
+              <td>mark-digits</td>
+              <td rowspan="2">回到开头@格开始标记数字位的个数</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>L</td>
+              <td>new</td>
+            </tr>
+            <tr>
+              <td rowspan="3">mark-digits</td>
+              <td>0</td>
+              <td>R,Px,R</td>
+              <td>mark-digits</td>
+              <td rowspan="3">用x标记所有数字位(0或1)；<br>用z标记未知位,<br>并在下一个E-格写入r表示过程和最低位</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>R,Px,R</td>
+              <td>mark-digits</td>
+            </tr>
+            <tr>
+              <td>None</td>
+              <td>R,Pz,R,R,Pr</td>
+              <td>find-x</td>
+            </tr>
+            <tr>
+              <td rowspan="3">find-x</td>
+              <td>x</td>
+              <td>E</td>
+              <td>first-r</td>
+              <td rowspan="3">擦除x标记</td>
+            </tr>
+            <tr>
+              <td>@</td>
+              <td>N</td>
+              <td>find-digits</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>L,L</td>
+              <td>find-x</td>
+            </tr>
+            <tr>
+              <td rowspan="2">first-r</td>
+              <td>r</td>
+              <td>R,R</td>
+              <td>last-r</td>
+              <td rowspan="2">找到第一个r，即过程和最低位</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>R,R</td>
+              <td>first-r</td>
+            </tr>
+            <tr>
+              <td rowspan="2">last-r</td>
+              <td>r</td>
+              <td>R,R</td>
+              <td>last-r</td>
+              <td rowspan="2">在第一个r后的2个E-格中分别都写入r；<br>与find-x配置组合成循环：每擦除1个x就在后面增加2个r<br>
+                最终r的个数就是2n+1</td>
+            </tr>
+            <tr>
+              <td>None</td>
+              <td>Pr,R,R,Pr</td>
+              <td>find-x</td>
+            </tr>
+            <tr>
+              <td rowspan="2">find-digits</td>
+              <td>@</td>
+              <td>R,R</td>
+              <td>find-1st-digit</td>
+              <td rowspan="2">x都擦除完后，从@格开始往后查找要进行单位相乘的数字位</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>L,L</td>
+              <td>find-digits</td>
+            </tr>
+            <tr>
+              <td rowspan="4">find-1st-digit</td>
+              <td>x</td>
+              <td>L</td>
+              <td>found-1st-digit</td>
+              <td rowspan="4">单位相乘：x标记的数字*y标记的数字；<br>或者，z标记的数字自乘<br>
+                所以这里先找到被标记的数作为单位相乘的第1位</td>
+            </tr>
+            <tr>
+              <td>y</td>
+              <td>L</td>
+              <td>found-1st-digit</td>
+            </tr>
+            <tr>
+              <td>z</td>
+              <td>L</td>
+              <td>found-3nd-digit</td>
+            </tr>
+            <tr>
+              <td>None</td>
+              <td>R,R</td>
+              <td>find-1st-digit</td>
+            </tr>
+            <tr>
+              <td rowspan="3">find-2nd-digit</td>
+              <td>x</td>
+              <td>L</td>
+              <td>found-3nd-digit</td>
+              <td rowspan="3">找到另一个x或y标记，作为单位相乘的第2位</td>
+            </tr>
+            <tr>
+              <td>y</td>
+              <td>L</td>
+              <td>found-3nd-digit</td>
+            </tr>
+            <tr>
+              <td>None</td>
+              <td>R,R</td>
+              <td>find-3nd-digit</td>
+            </tr>
+            <tr>
+              <td rowspan="2">found-1st-digit</td>
+              <td>0</td>
+              <td>R</td>
+              <td>add-zero</td>
+              <td rowspan="2">如果第一位是0，那么相乘结果为0，将过程和+0；<br>
+                如果是1，则要看第2位是什么</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>R,R,R</td>
+              <td>find-3nd-digit</td>
+            </tr>
+            <tr>
+              <td rowspan="3">found-3nd-digit</td>
+              <td>0</td>
+              <td>R</td>
+              <td>add-zero</td>
+              <td rowspan="3">如果被z标记的是空格，即未知位需要自乘，<br>那么直接将过程和+1，因为未知位假设为1<br>
+                如果不是未知位，那么0自乘+0、1自乘+1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>R</td>
+              <td>add-one</td>
+            </tr>
+            <tr>
+              <td>None</td>
+              <td>R</td>
+              <td>add-one</td>
+            </tr>
+            <tr>
+              <td rowspan="3">add-zero</td>
+              <td>r</td>
+              <td>Ps</td>
+              <td>add-finished</td>
+              <td rowspan="3">记录过程和加0的结果，r变s、u变v</td>
+            </tr>
+            <tr>
+              <td>u</td>
+              <td>Pv</td>
+              <td>add-finished</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>R,R</td>
+              <td>add-zero</td>
+            </tr>
+            <tr>
+              <td rowspan="3">add-one</td>
+              <td>r</td>
+              <td>Pv</td>
+              <td>add-finished</td>
+              <td rowspan="3">记录过程和加1的结果，r变成v、u变成s代表+1<br>u变成s后还要移到过程和的下一位准备进位</td>
+            </tr>
+            <tr>
+              <td>u</td>
+              <td>Ps,R,R</td>
+              <td>carry</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>R,R</td>
+              <td>add-one</td>
+            </tr>
+            <tr>
+              <td rowspan="3">carry</td>
+              <td>r</td>
+              <td>Pu</td>
+              <td>add-finished</td>
+              <td rowspan=3>记录过程和进位结果，r变成u，进位结束；u变成r，继续进位；<br>
+                如果没有位了，那就代表未知位大了，假设不成立，未知位为0</td>
+            </tr>
+            <tr>
+              <td>None</td>
+              <td>Pu</td>
+              <td>new-digit-is-zero</td>
+            </tr>
+            <tr>
+              <td>u</td>
+              <td>Pr,R,R</td>
+              <td>carry</td>
+            </tr>
+            <tr>
+              <td rowspan="2">add-finished</td>
+              <td>@</td>
+              <td>R,R</td>
+              <td>erase-old-x</td>
+              <td rowspan="2">回到@格，准备擦除旧标记</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>L,L</td>
+              <td>add-finished</td>
+            </tr>
+            <tr>
+              <td rowspan="3">erase-old-x</td>
+              <td>x</td>
+              <td>E,L,L</td>
+              <td>print-new-x</td>
+              <td rowspan="3">擦除x或将z变成y，并移到上一个E-格，准备将x移动到前一位</td>
+            </tr>
+            <tr>
+              <td>z</td>
+              <td>Py,L,L</td>
+              <td>print-new-x</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>R,R</td>
+              <td>erase-old-x</td>
+            </tr>
+            <tr>
+              <td rowspan="3">print-new-x</td>
+              <td>@</td>
+              <td>R,R</td>
+              <td>erase-old-y</td>
+              <td rowspan="3">y变成x或将新数字位标记上x</td>
+            </tr>
+            <tr>
+              <td>y</td>
+              <td>Pz</td>
+              <td>find-digits</td>
+            </tr>
+            <tr>
+              <td>None</td>
+              <td>Px</td>
+              <td>find-digits</td>
+            </tr>
+            <tr>
+              <td rowspan="2">erase-old-y</td>
+              <td>y</td>
+              <td>E,L,L</td>
+              <td>print-new-y</td>
+              <td rowspan="2">被y标记的数字位与所有数字位都相乘后，即本轮单位相乘结束后<br>
+                将y移动到前一位，准备开始下一轮单位相乘</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>R,R</td>
+              <td>erase-old-y</td>
+            </tr>
+            <tr>
+              <td rowspan="2">print-new-y</td>
+              <td>@</td>
+              <td>R</td>
+              <td>new-digit-is-one</td>
+              <td rowspan="2">如果前面E-格中是@，那么本轮自乘运算结束，假设成立，未知位是1<br>
+                否则，将上一个数字位标记上y</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>Py,R</td>
+              <td>reset-new-x</td>
+            </tr>
+            <tr>
+              <td rowspan="2">reset-new-x</td>
+              <td>None</td>
+              <td>R,Px</td>
+              <td>flag-result-digits</td>
+              <td rowspan="2">标记y移位后，x要重置，即移到最低位——未知位</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>R,R</td>
+              <td>reset-new-x</td>
+            </tr>
+            <tr>
+              <td rowspan="3">flag-result-digits</td>
+              <td>s</td>
+              <td>Pt,R,R</td>
+              <td>unflag-result-digits</td>
+              <td rowspan="3">标记y移位且x重置之后，过程和的最低位要变符号<br>
+                s变成t、v变成w，代表这个位不会再参与下面的计算</td>
+            </tr>
+            <tr>
+              <td>v</td>
+              <td>Pw,R,R</td>
+              <td>unflag-result-digits</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>R,R</td>
+              <td>flag-result-digits</td>
+            </tr>
+            <tr>
+              <td rowspan="3">unflag-result-digits</td>
+              <td>s</td>
+              <td>Pr,R,R</td>
+              <td>unflag-result-digits</td>
+              <td rowspan="3">其他位需要继续参加计算，所以要换回初始符号</td>
+            </tr>
+            <tr>
+              <td>v</td>
+              <td>Pu,R,R</td>
+              <td>unflag-result-digits</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>N</td>
+              <td>find-digits</td>
+            </tr>
+            <tr>
+              <td rowspan="2">new-digit-is-zero</td>
+              <td>@</td>
+              <td>R</td>
+              <td>print-zero-digit</td>
+              <td rowspan="2">如果未知位是0，回到第1位，准备在未知位写入0</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>L</td>
+              <td>new-digit-is-zero</td>
+            </tr>
+            <tr>
+              <td rowspan="3">print-zero-digit</td>
+              <td>0</td>
+              <td>R,E,R</td>
+              <td>print-zero-digit</td>
+              <td rowspan="3">在未知位写入0，寻找未知位的过程中擦除所有数字位标记</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>R,E,R</td>
+              <td>print-zero-digit</td>
+            </tr>
+            <tr>
+              <td>None</td>
+              <td>P0,R,R,R</td>
+              <td>cleanup</td>
+            </tr>
+            <tr>
+              <td rowspan="2">new-digit-is-one</td>
+              <td>@</td>
+              <td>R</td>
+              <td>print-one-digit</td>
+              <td rowspan="2">如果未知位是1，准备在未知位写入1</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>L</td>
+              <td>new-digit-is-one</td>
+            </tr>
+            <tr>
+              <td rowspan="3">print-one-digit</td>
+              <td>0</td>
+              <td>R,E,R</td>
+              <td>print-one-digit</td>
+              <td rowspan="3">未知位写入完成后，准备擦除过程和标记</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>R,E,R</td>
+              <td>print-one-digit</td>
+            </tr>
+            <tr>
+              <td>None</td>
+              <td>P1,R,R,R</td>
+              <td>cleanup</td>
+            </tr>
+            <tr>
+              <td rowspan="2">cleanup</td>
+              <td>None</td>
+              <td>N</td>
+              <td>new</td>
+              <td rowspan="2">擦除过程和标记，并准备计算下一个未知位</td>
+            </tr>
+            <tr>
+              <td>else</td>
+              <td>E,R,R</td>
+              <td>cleanup</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </details>
+
+      <h2>3. 缩略表</h2>
+
+      <p>
+        有些基本配置，在所有图灵机中几乎是通用的，比如查找、复制、对比等。图灵用<b>缩略表(<i>abbreviated tables</i>)</b>的形式来定义这些通用配置，从而使它们能够被复用。
+        缩略表中包含大写的德文字母和小写的希腊字母。它们本质上是"变量"。将每个大写德文字母用配置替代，并将每个小写希腊字母用字符替代，就得到了前面那种形式的配置表，现在称之为<b>完全配置表</b>(与"缩略表"相对)。
+      </p>
+
+      <p>
+        下面的缩略表中出现的大写德文字母包括：$\frak{C,B,A,E}$。每个字母代表的配置不是一定的，重要的是它的位置，比如经过$\frak{f}(\frak{C,B},\alpha)$，查找到第一个$\alpha$之后转到$\frak{C}$。这只代表转到
+        $\frak{f}$的第一个参数所代表的配置。比如后面$\frak{C}$的位置会被$\frak{e}(\frak{C,B},\alpha)$这样的配置代替，变成$\frak
+        f\Big(e(C,B,\alpha),B,\alpha\Big)$。那转到的就是$\frak{e}(\frak{C,B},\alpha)$。
+        而另一类参数，即小写的希腊字母，包括：$\alpha, \beta$，代表的不是配置，而是图灵机读写的字符。同样，它们的指代也不是一定的，它们只代表在参数序列相应位置上出现的字符。
+        这也就是为什么图灵说它们本质上只是"变量"，大写德文字母是<u>配置变量</u>，小写希腊字母是<u>字符变量</u>。
+        还有，在缩略表中，配置与新配置相同的情况就代表重复执行当前操作，直到扫描符有所改变。
+      </p>
+
+      <p>
+        下面是图灵定义的一些缩略表，在后面搭建通用机的时候会用到。在我的<a href="https://github.com/TimLee135/turing">Turing Machine</a>中也实现了这些配置。
+        缩略表中这些带有"变量"的配置，图灵之后称其为<b>m-函数(m-<i>functions</i></b>)。
+        图灵论文中的缩略表有一些错误，这里根据Donald<sup><a href="#footnote3">3</a></sup>的建议进行了修改。
+      </p>
+
+
+      <table>
+        <caption>缩略表<br>
+          <span
+            style="font-size: 70%;">备注列中$\rightarrow$后是转向的新配置以及扫描格最终停留的位置；$-n$代表扫描格停留在最后一个字符的后面第$n$格，0代表停留在最后一个字符<span>
+        </caption>
+        <thead>
+          <tr>
+            <th>m-函数</th>
+            <th>扫描符</th>
+            <th>操作</th>
+            <th>新配置</th>
+            <th>备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2">$\frak{f(C,B,\alpha)}$</td>
+            <td>@</td>
+            <td>L</td>
+            <td>$\frak f_1(C,B,\alpha)$</td>
+            <td rowspan="8">$\frak f(C,B,\alpha)
+              \begin{cases}
+              找到第一个\alpha\rightarrow\frak{C} \\
+              没找到\alpha\rightarrow\frak{B},-3
+              \end{cases}$</td>
+          </tr>
+          <tr>
+            <td>not @</td>
+            <td>L</td>
+            <td>$\frak f(C,B,\alpha)$</td>
+          </tr>
+          <tr>
+            <td rowspan="3">$\frak f_1(C,B,\alpha)$</td>
+            <td>$\alpha$</td>
+            <td>
+            <td>$\frak{C}$</td>
+          </tr>
+          <tr>
+            <td>not $\alpha$</td>
+            <td>R</td>
+            <td>$\frak f_1(C,B,\alpha)$</td>
+          </tr>
+          <tr>
+            <td>None</td>
+            <td>R</td>
+            <td>$\frak f_2(C,B,\alpha)$</td>
+          </tr>
+          <tr>
+            <td rowspan="3">$\frak f_2(C,B,\alpha)$</td>
+            <td>$\alpha$</td>
+            <td>
+            <td>$\frak{C}$</td>
+          </tr>
+          <tr>
+            <td>not $\alpha$</td>
+            <td>R</td>
+            <td>$\frak f_1(C,B,\alpha)$</td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>None</td>
+            <td>R</td>
+            <td>$\frak B$</td>
+          </tr>
+          <tr>
+            <td>$\frak e(C,B,\alpha)$</td>
+            <td>
+            <td>
+            <td>$\frak f\Big(e_1(C,B,\alpha),B,\alpha\Big)$</td>
+            <td rowspan="3">$\frak e(C,B,\alpha)
+              \begin{cases}
+              删除第一个\alpha\rightarrow\frak{C} \\
+              没找到\alpha\rightarrow\frak{B},-3
+              \end{cases}$<br>
+              $\frak{e}(\frak{B},a)$删除所有$a\rightarrow\frak{B},-3$</td>
+          </tr>
+          <tr>
+            <td>$\frak e_1(C,B,\alpha)$</td>
+            <td>
+            <td>E</td>
+            <td>$\frak C$</td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>$\frak e(B,\alpha)$</td>
+            <td>
+            <td>
+            <td>$\frak e\Big(e(B,\alpha),B,\alpha\Big)$</td>
+          </tr>
+          <tr>
+            <td>$\frak pe(C,\beta)$</td>
+            <td>
+            <td>
+            <td>$\frak f\Big(pe_1(C,\beta),C,@\Big)$</td>
+            <td rowspan="3">$\mathfrak{pe(C,\beta)}在末尾打印字符\beta\rightarrow\mathfrak{C},0(新打印的字符)$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak pe_1(C,\beta)$</td>
+            <td>Any</td>
+            <td>R,R</td>
+            <td>$\frak pe_1(C,\beta)$</td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>None</td>
+            <td>P$\beta$</td>
+            <td>$\frak{C}$</td>
+          </tr>
+          <tr>
+            <td>$\frak l(C)$</td>
+            <td>
+            <td>L</td>
+            <td>$\frak C$</td>
+            <td rowspan="6">$\frak c(C,B,\alpha)
+              \begin{cases}
+              将第一个被\alpha标记的字符\beta复制到末尾\rightarrow\frak C \\
+              没找到\alpha\rightarrow\frak B, -3
+              \end{cases}$</td>
+          </tr>
+          <tr>
+            <td>$\frak r(C)$</td>
+            <td>
+            <td>R</td>
+            <td>$\frak C$</td>
+          </tr>
+          <tr>
+            <td>$\frak f'(C,B,\alpha)$</td>
+            <td>
+            <td>
+            <td>$\frak f\Big(l(C),B,\alpha\Big)$</td>
+          </tr>
+          <tr>
+            <td>$\frak f''(C,B,\alpha)$</td>
+            <td>
+            <td>
+            <td>$\frak f\Big(r(C),B,\alpha\Big)$</td>
+          </tr>
+          <tr>
+            <td>$\frak c(C,B,\alpha)$</td>
+            <td>
+            <td>
+            <td>$\frak f'\Big(c_1(C),B,\alpha\Big)$</td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>$\frak c_1(C)$</td>
+            <td>$\beta$</td>
+            <td>
+            <td>$\frak pe(C,\beta)$</td>
+          </tr>
+          <tr>
+            <td>$\frak ce(C,B,\alpha)$</td>
+            <td>
+            <td>
+            <td>$\frak c\Big(e(C,B,\alpha),B,\alpha\Big)$</td>
+            <td rowspan="2">$\frak ce(C,B,\alpha)
+              \begin{cases}
+              复制被\alpha标记的字符\beta到末尾，并删除\alpha\rightarrow\frak{C} \\
+              没找到\alpha标记\rightarrow\frak B, -3
+              \end{cases}$<br>
+              $\frak ce(B,\alpha)按顺序复制所有被\alpha标记的字符到末尾，并删除所有\alpha\rightarrow\frak B,-3$</td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>$\frak ce(B,\alpha)$</td>
+            <td>
+            <td>
+            <td>$\frak ce\Big(ce(B,\alpha),B,\alpha\Big)$</td>
+          </tr>
+          <tr>
+            <td>$\frak re (C,B,\alpha,\beta)$</td>
+            <td>
+            <td>
+            <td>$\frak f\Big(re_1(C,B,\alpha,\beta),B,\alpha\Big)$</td>
+            <td rowspan="3">$\frak re(C,B,\alpha,\beta)
+              \begin{cases}
+              用\beta来替换第一个\alpha\rightarrow\frak C \\
+              没找到\alpha\rightarrow\frak B, -3
+              \end{cases}$<br>
+              $\frak re(B,\alpha,\beta)$用$\beta$替换所有字符$\alpha\rightarrow\frak B, -3$</td>
+          </tr>
+          <tr>
+            <td>$\frak re_1(C,B,\alpha,\beta)$</td>
+            <td>
+            <td>E,P$\beta$</td>
+            <td>$\frak C$</td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>$\frak re(B,\alpha,\beta)$</td>
+            <td>
+            <td>
+            <td>$\frak re\Big(re(B,\alpha,\beta),B,\alpha,\beta\Big)$</td>
+          </tr>
+          <tr>
+            <td>$\frak cr(C,B,\alpha,\beta)$</td>
+            <td>
+            <td>
+            <td>$\frak c\Big(re(C,B,\alpha,\beta),B,\alpha\Big)$</td>
+            <td rowspan="2">$\frak cr(C,B,\alpha,\beta)
+              \begin{cases}
+              将第一个被\alpha标记的字符复制到末尾，并用\beta替换\alpha\rightarrow\frak C \\
+              没找到\alpha\rightarrow\frak B, -3
+              \end{cases}$;<br>$\frak cr(B,\alpha,\beta)
+              \begin{cases}
+              将所有被\alpha标记的字符按顺序复制到末尾，并用\beta替换所有\alpha\rightarrow\frak B,-3 \\
+              如果没有找到\alpha，就将\beta替换回\alpha\rightarrow\frak B,-3
+              \end{cases}$</td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>$\frak cr(B,\alpha,\beta)$</td>
+            <td>
+            <td>
+            <td>$\frak cr\Big(cr(B,\alpha),re(B,\beta,\alpha),\alpha,\beta\Big)$</td>
+          </tr>
+          <tr>
+            <td>$\frak cp(C,A,E,\alpha,\beta)$</td>
+            <td>
+            <td>
+            <td>$\frak f'\Big(cp_1(C_1,A,\beta),f(A,E,\beta),\alpha\Big)$</td>
+            <td rowspan="4">$\begin{aligned}&\frak cp(C,A,E,\alpha,\beta)\\&比较分别被第一个\\&\alpha和\beta标记的字符\end{aligned}
+              \begin{cases}
+              两者相同\rightarrow\frak C, \beta标记的字符 \\
+              两者不同\rightarrow\frak A, \beta标记的字符 \\
+              两者都不存在\rightarrow\frak E, -3
+              \end{cases}$</td>
+          </tr>
+          <tr>
+            <td>$\frak{cp_1}(\frak{C,A},\beta)$</td>
+            <td>$\gamma$</td>
+            <td>
+            <td>$\frak{f'}\Big(\frak{cp_2}(\frak{C,A},\gamma),\frak{A},\beta\Big)$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{cp_2}(\frak{C,A},\gamma)$</td>
+            <td>$\gamma$</td>
+            <td>
+            <td>$\frak{C}$</td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>not $\gamma$</td>
+            <td>
+            <td>$\frak{A}$</td>
+          </tr>
+          <tr>
+            <td>$\frak cpe(C,A,E,\alpha,\beta)$</td>
+            <td>
+            <td>
+            <td>$\frak cp\bigg(e\Big(e(C,C,\beta),C,\alpha\Big),A,E,\alpha,\beta\bigg)$</td>
+            <td rowspan="2">$\begin{aligned}
+              &\frak cpe(C,A,E,\alpha,\beta)\\&比较分别被第一个\\&\alpha和\beta标记的字符，\\&并删除标记\alpha和\beta
+              \end{aligned}\begin{cases}
+              两者相同\rightarrow\frak C,原\beta标记(空格) \\
+              两者不同\rightarrow\frak A,\beta标记的字符 \\
+              两者都不存在\rightarrow\frak E,-3
+              \end{cases}$;<br><br>$\begin{aligned}
+              &\frak cpe(A,E,\alpha,\beta)\\&持续比较被\alpha和\beta\\&标记的字符直到\\&结果不相同，并在\\&比较结果相同时，\\&删除对应\alpha和\beta
+              \end{aligned} \begin{cases}
+              全部相同\rightarrow\frak E,-3 \\
+              找到不同的字符\rightarrow\frak A,\beta标记的字符 \\
+              没找到\rightarrow\frak E,-3
+              \end{cases}$</td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>$\frak cpe(A,E,\alpha,\beta)$</td>
+            <td>
+            <td>
+            <td>$\frak cpe\Big(cpe(A,E,\alpha,\beta),A,E,\alpha,\beta\Big)$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak g(C)$</td>
+            <td>Any</td>
+            <td>R</td>
+            <td>$\frak g(C)$</td>
+            <td rowspan="7">$\frak g(C)移动到纸带末尾\rightarrow C,-2$;<br>
+              $\frak g(C,\alpha)从末尾往回寻找\alpha，即找到最后一个\alpha\rightarrow C,\alpha标记$</td>
+          </tr>
+          <tr>
+            <td>None</td>
+            <td>R</td>
+            <td>$\frak g_1(C)$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak g_1(C)$</td>
+            <td>Any</td>
+            <td>R</td>
+            <td>$\frak g(C)$</td>
+          </tr>
+          <tr>
+            <td>None</td>
+            <td>
+            <td>$\frak C$</td>
+          </tr>
+          <tr>
+            <td>$\frak g(C,\alpha)$</td>
+            <td>
+            <td>
+            <td>$\frak g\Big(g_1(C,\alpha)\Big)$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak g_1(C,\alpha)$</td>
+            <td>$\alpha$</td>
+            <td>
+            <td>$\frak C$</td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>not $\alpha$</td>
+            <td>L</td>
+            <td>$\frak g_1(C,\alpha)$</td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>$\frak pe_2(C,\alpha,\beta)$</td>
+            <td>
+            <td>
+            <td>$\frak pe\Big(pe(C,\beta),\alpha\Big)$</td>
+            <td>$\frak pe_2(C,\alpha,\beta)$在末尾新增2个F-格，分别打印$\alpha和\beta\rightarrow\frak C,\beta字符$</td>
+          </tr>
+          <tr>
+            <td>$\frak ce_2(B,\alpha,\beta)$</td>
+            <td>
+            <td>
+            <td>$\frak ce\Big(ce(B,\beta),\alpha\Big)$</td>
+            <td rowspan="2">$\frak ce2(B,\alpha,\beta)按顺分别将所有被\alpha和\beta标记的字符复制到末尾，并删除标记\rightarrow B，-3$
+              <br>$\frak ce_3(B,\alpha,\beta,\gamma)按顺序分别将所有被\alpha,\beta,\gamma标记的字符复制到末尾，并删除标记\rightarrow B,-3$
+            </td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>$\frak ce_3(B,\alpha,\beta,\gamma)$</td>
+            <td>
+            <td>
+            <td>$\frak ce\Big(ce_2(B,\beta,\gamma),\alpha\Big)$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak e(C)$</td>
+            <td>@</td>
+            <td>R</td>
+            <td>$\frak e_1(C)$</td>
+            <td rowspan="4">$\frak e(C)从第2个@右边开始删除所有标记\rightarrow C, -2$</td>
+          </tr>
+          <tr>
+            <td>Not @</td>
+            <td>L</td>
+            <td>$\frak e(C)$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak e_1(C)$</td>
+            <td>Any</td>
+            <td>R,E,R</td>
+            <td>$\frak e_1(C)$</td>
+          </tr>
+          <tr style="border-bottom: 3px solid #4b4b4b;">
+            <td>None</td>
+            <td>
+            <td>$\frak C$</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>4. 通用图灵机</h2>
+
+      <h3>4.1 标准描述的规则</h3>
+      <p>
+        首先图灵机的配置要满足下面的条件：
+      <ol>
+        <li>不能使用缩略表，而且每个配置里面的操作都只能有一次打印(或擦除)和一次移动</li>
+        <li>配置名称全部采用$q_i$的形式，初始配置为$q_1$</li>
+        <li>字符采取如下编码</li>
+        <ul>
+          <li>空格：$S_0$</li>
+          <li>0：$S_1$</li>
+          <li>1：$S_2$</li>
+          <li>...：$S_j$</li>
+        </ul>
+      </ol>
+      </p>
+
+      <p>这样的话所有的配置只可能是以下3种形式中的一种：</p>
+      <table>
+        <thead>
+          <tr>
+            <th>配置</th>
+            <th>扫描符</th>
+            <th>操作</th>
+            <th>新配置</th>
+            <th>形式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$q_i$</td>
+            <td>$S_j$</td>
+            <td> $PS_k,L$</td>
+            <td> $q_m$</td>
+            <td>$N_1$ </td>
+          </tr>
+          <tr>
+            <td>$q_i$</td>
+            <td>$S_j$</td>
+            <td>$PS_k,R$</td>
+            <td>$q_m$</td>
+            <td>$N_2$</td>
+          </tr>
+          <tr>
+            <td>$q_i$</td>
+            <td>$S_j$</td>
+            <td>$PS_k$</td>
+            <td>$q_m$</td>
+            <td>$N_3$</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <p>擦除操作可以看成打印空格，即$PS_0$；只有移动的操作可以看成再打印一遍当前的字符然后移动，比如在$S_j$处的操作$R$，就相当于$PS_j,R$；$表示不移动扫描格</p>
+      <p>
+        省略掉"$P$"后，每种形式可以写成一种统一的表达式:
+      <ul>
+        <li>$N_1:q_iS_jS_kLq_m$</li>
+        <li>$N_2:q_iS_jS_kRq_m$</li>
+        <li>$N_3:q_iS_jS_kNq_m$</li>
+      </ul>
+      </p>
+
+      <p>将图灵机的所有配置都用上面的表达式编码，就得到了图灵机的<b>完全描述(<i>complete description</i>)</b>。</p>
+
+      <p>
+        接着将完全描述又进行如下编码：
+      <ul>
+        <li>$q_i:D\underbrace{A\cdots A}_{重复i次}$</li>
+        <li>$S_j:D\underbrace{C\cdots C}_{重复j次}$</li>
+        <li>$S_k:D\underbrace{C\cdots C}_{重复k次}$</li>
+      </ul>
+      </p>
+
+      <p>这样整个标准描述就会变成一串由$A, C, D, L, R, N$组成的序列，其中每个配置的编码用"$;$"结束，这就是<b>标准描述(<i>standard description, S.D</i>)</b>。</p>
+
+      <p>如果再进一步，用不同的整数来分别代替$A, C, D, L, R, N, ;$，就会得到<b>描述数(<i>description number, D.N</i>)</b></p>
+
+      <p>循环打印0和1的图灵机的完全配置表如下：</p>
+      <table>
+        <thead>
+          <tr>
+            <th>配置</th>
+            <th>扫描符</th>
+            <th>操作</th>
+            <th>新配置</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$q_1$</td>
+            <td>$S_0$</td>
+            <td>$PS_1,R$</td>
+            <td>$q_2$</td>
+          </tr>
+          <tr>
+            <td>$q_2$</td>
+            <td>$S_0$</td>
+            <td>$PS_0,R$</td>
+            <td>$q_3$</td>
+          </tr>
+          <tr>
+            <td>$q_3$</td>
+            <td>$S_0$</td>
+            <td>$PS_2,R$</td>
+            <td>$q_4$</td>
+          </tr>
+          <tr>
+            <td>$q_4$</td>
+            <td>$S_0$</td>
+            <td>$PS_0,R$</td>
+            <td>$q_1$</td>
+          </tr>
+        </tbody>
+      </table>
+
+      完全描述如下：
+      <p>$q_1S_0S_1Rq_2;\,q_2S_0S_0Rq_3;\,q_3S_0S_2Rq_4;\,q_4S_0S_0Rq_1;$</p>
+
+      <p>标准描述如下：</p>
+      <p>$DADDCRDAA;DAADDRDAAA;DAAADDCCRDAAAA;DAAAADDRDA$</p>
+
+      <p>引入这些编码之后，图灵又补充了一个缩略表，这个缩略表中的m-函数专门用来标记代表配置和字符的S.D编码：</p>
+
+      <table>
+        <caption>附属缩略表</caption>
+        <thead>
+          <tr>
+            <th>配置</th>
+            <th>扫描符</th>
+            <th>操作</th>
+            <th>新配置</th>
+            <th>备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2">$\frak{con(C,\alpha)}$</td>
+            <td>Not A</td>
+            <td>R,R</td>
+            <td>$\frak{con(C,\alpha)}$</td>
+            <td rowspan="7">$\frak{con(C,\alpha)}$在表示配置和字符的编码(D,A,C)左边都标记上$\alpha$<br>
+              并将读写头停留在下一个D后面的F-格上
+            </td>
+          </tr>
+          <tr>
+            <td>A</td>
+            <td>L,P$\alpha$,R</td>
+            <td>$\frak{con_1(C,\alpha)}$</td>
+          </tr>
+          <tr>
+            <td rowspan="3">$\frak{con_1(C,\alpha)}$</td>
+            <td>A</td>
+            <td>R,P$\alpha$,R</td>
+            <td>$\frak{con_1(C,\alpha)}$</td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>R,P$\alpha$,R</td>
+            <td>$\frak{con_2(C,\alpha)}$</td>
+          </tr>
+          <tr>
+            <td>None</td>
+            <td>PD,R,P$\alpha$,R,R,R</td>
+            <td>$\frak{C}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{con_2(C,\alpha)}$</td>
+            <td>C</td>
+            <td>R,P$\alpha$,R</td>
+            <td>$\frak{con_2(C,\alpha)}$</td>
+          </tr>
+          <tr style="border-bottom: 2px solid #4b4b4b;">
+            <td>Not C</td>
+            <td>R,R</td>
+            <td>$\frak{C}$</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>图灵的论文中没有出现第5行，根据《图灵的秘密》<sup><a href="#footnote2">2</a></sup>(杨卫东等,P140)补充上来。</p>
+
+      <h3>4.2 $\scr M'$机</h3>
+
+      <p>通用图灵机$\scr U$的目的是根据图灵机$\scr M$的标准描述，计算出与$\scr M$要计算的数字序列相同的序列(前提是$\scr M$必须是单方向的)。
+        但是图灵并没有让通用图灵机$\scr U$直接模仿图灵机$\scr M$的计算，而是让$\scr U$计算出$\scr M'$机，用来在$F$-格上写入$\scr M$机的完全格局以及$\scr M$机要写入的字符。</p>
+
+      <p>图灵将图灵机的完全格局也进行了编码。比如前面计算无理数的图灵机的完全格局：</p>
+      <p>$\mathfrak{b:@@o}0\quad0:\mathfrak{@@q}0\quad0:\cdots$</p>
+
+      <p>
+        编码规则如下：
+      <ul>
+        <li>配置：
+          <ul>
+            <li>$\mathfrak{b}: DA$</li>
+            <li>$\mathfrak{o}: DAA$</li>
+            <li>$\mathfrak{q}: DAAA$</li>
+            <li>$\mathfrak{p}: DAAAA$</li>
+            <li>$\mathfrak{f}: DAAAAA$</li>
+          </ul>
+        </li>
+        <li>字符：
+          <ul>
+            <li>$空格: D$</li>
+            <li>$0: DC$</li>
+            <li>$1: DCC$</li>
+            <li>$@: DCCC$</li>
+          </ul>
+        </li>
+      </ul>
+      </p>
+
+      <p>
+        编码后如下：
+        $$
+        \begin{equation}
+        DA:DCCCDCCCDAADCDDC:DCCCDCCCDAAADCDDC:\cdots \tag{$C_1$}
+        \end{equation}
+        $$
+        (以上内容都打印在$F$-格中)<br>
+        除了写入$\scr M$的完全格局，$\scr M'$还会将$\scr M$要打印的数字序列写在每个完全格局之间：
+        $$
+        \begin{equation}
+        DA:0:0:DCCCDCCCDAADCDDC:DCCCDCCCDAAADCDDC:\cdots \tag{$C_2$}
+        \end{equation}
+        $$
+        以上就是计算无理数$0.01011011101111\cdots$的图灵机$\scr M$对应的$\scr M'$机，也是通用图灵机$\scr U$要计算的内容。
+      </p>
+
+      <h3>4.3 通用机设计</h3>
+      <p>我们以一个简单的$\scr M$机为例：</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>配置</th>
+            <th>扫描符</th>
+            <th>操作</th>
+            <th>新配置</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$q_1$</td>
+            <td>$S_0$</td>
+            <td>$PS_1,R$</td>
+            <td>$q_2$</td>
+          </tr>
+          <tr>
+            <td>$q_2$</td>
+            <td>$S_0$</td>
+            <td>$PS_2,R$</td>
+            <td>$q_1$</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <p>
+        这个图灵机循环打印0和1，且中间不留空格。<br>
+        其标准描述为：<br>
+        <center>DADDCRDAA ; DAADDCCRDA</center>
+      </p>
+
+      <p>
+        其完全格局如下：
+        $$
+        \begin{aligned}
+        &\textcolor{red}{q_1}\kern{0.5em}: \\
+        &0\textcolor{red}{q_2}\kern{0.5em}:\\
+        &0\kern{1em}1\textcolor{red}{q_1}\kern{0.5em}:\\
+        &0\kern{1em}1\kern{1em}0\textcolor{red}{q_2}\kern{0.5em}:\\
+        &\cdots
+        \end{aligned}
+        $$
+        <i>注意：这里留给配置的空间比较宽，但数字之间是没有空格的。</i>
+      </p>
+
+      <p>
+        其完全格局的编码如下：<br>
+        <center>DAD : DCDAAD : DCDCCDAD : DCDCCDCDAAD : ...</center>
+      </p>
+
+      <p>
+        再来看通用图灵机在纸带上要写入哪些内容：
+      <ul>
+        <li>
+          <b>配置区</b>：通用图灵机的纸带以"$@@;$"开头，紧接着是$\scr M$的标准描述，标准描述中的每个配置以 "$;$" 结束，最后以"$\#$"表示$\scr
+          M$的所有标准描述的结束。我这里将纸带的这部分称为配置区。<br>
+          上述$\scr M$机在通用图灵机中的纸带的配置区如下（<i>注意：每个编码之间都有E-格，用来做标记</i>）：<br>
+          <center>@@; D A D D C R D A A ; D A A D D C C R D A # </center>
+        </li>
+        <li>
+          <b>格局区</b>：在通用机开始运行之后，首先会在"$\#$"后一个F-格中写入"$:$"，然后依次写入$\scr M$机的每一个完全格局，以及$\scr M$机要写入的数字序列，即$C2$这种形式。
+          我这里将纸带的这部分称为格局区。
+          对于该例中的$\scr M$机，纸带的配置区+格局区如下：
+          <center>@@; D A D D C R D A A ; D A A D D C C R D A # : D A D : 0 : D C D A A D : 1 : D C D C C D A D : 0 : D
+            C D
+            C C D C D A A D : 1 : D C D C C D C D C C D A</center>
+        </li>
+      </ul>
+      </p>
+
+
+      <p>
+        通用机是如何在纸带上写入上面这些内容的呢？这要借助于之前图灵定义的那些m-函数，其大致思路如下：
+      <ol>
+        <li>利用$\frak con$函数标记配置、字符：</li>
+        <ul>
+          <li>x标记配置区标准描述中的配置和扫描符(格局)</li>
+          <li>y标记格局区完全格局中的当前格局(配置和扫描符)</li>
+          <li>z标记已经被对比过的配置区中的标准描述</li>
+        </ul>
+        <li>利用$\frak cpe$函数对比分别被x和y标记的配置区中的标准描述和格局区中的当前格局，从而找到与当前格局对应的配置的标准描述</li>
+        <li>找到对应的标准描述之后，接着利用$\frak con$函数将配置中的写入字符和操作用u标记、新配置用y标记，并删除z标记</li>
+        <li>又利用$\frak con$函数对格局区中的当前格局进行标记，以便于后续的格局变化</li>
+        <ul>
+          <li>x标记格局区完全格局中配置前面的那个字符</li>
+          <li>v标记格局区中被x标记的字符的前面所有的字符</li>
+          <li>w标记格局区中完全格局里没有被x或v标记、也不是扫描符的其他字符</li>
+        </ul>
+        <li>利用$\frak pe$函数在当前格局后面写入配置中规定的写入字符</li>
+        <li>利用$\frak ce$函数复制配置区中分别被u和y标记的标准描述里的写入字符和新配置，以及格局区中被x,v,w标记的字符，以在格局区写下新的完全格局</li>
+      </ol>
+      </p>
+
+      <p>
+        对于x, u, v, w, y标记，可以通过下面这个例子有更清晰的理解：<br>
+        <center>: DvDvDxD A D C DwDwCw:</center>
+        上面是格局区中的一个完全格局，可以看到只有表示配置和扫描符的编码(D A D C)没有被标记。
+        配置前面的一个字符(D)被标记上x；再前面的字符(D D)被标记上v；扫描符后面的字符(D D C)被标记上w。
+        再来看配置区：<br>
+        <center>; D A D C DuCuCuRuDyAyAy;</center>
+        在复制操作之前R右边的标记会被擦除，变成<br>
+        <center>; D A D C DuCuCuR DyAyAy;</center>
+        可以看到写入字符(D C C)和新配置(D A A)分别被标记上u和y。<br>
+        在写入新完全格局的时候，分别复制被v, x, u, w标记的字符，就能够组成新完全格局中的所有字符；<br>
+        然后根据移动操作(R, L, N)来判断被y标记的新格局的位置:
+      <ul>
+        <li>N: v x y u w</li>
+        <li>R: v x u y w</li>
+        <li>L: v x y u w</li>
+      </ul>
+      </p>
+
+      <p>详细的步骤参考下面的配置表，也可以在我的<a href="https://github.com/TimLee135/turing">Turing Machine</a>[turing
+        machine]中运行这个通用图灵机示例。</p>
+
+      <table>
+        <caption>通用图灵机$\mathscr{U}$</caption>
+        <thead>
+          <tr>
+            <th>配置</th>
+            <th>扫描符</th>
+            <th>操作</th>
+            <th>新配置</th>
+            <th>备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$\frak b$</td>
+            <td>
+            <td>
+            <td>$\frak f(b_1,b_1,\#)$</td>
+            <td rowspan="2">$\mathfrak{b}在\#后的$F-格$上打印:DA(即初始格局)\rightarrow\mathfrak{anf}, A$<br><br>
+              $\begin{aligned}@@;\;D\;A\;D\;D\;C\;R\;D\;A\;A\;;\;D\;A\;A\;D\;D\;C\;C\;R\;D\;A\;\#\;
+              \\:\;D\;\mathop{A}\limits_{\frak anf}\end{aligned}$</td>
+          </tr>
+          <tr>
+            <td>$\frak b_1$</td>
+            <td>
+            <td>R,R,P:,R,R,PD,R,R,PA</td>
+            <td>$\frak anf$</td>
+          </tr>
+          <tr>
+            <td>$\frak anf$</td>
+            <td>
+            <td>
+            <td>$\frak g(anf_1,:)$</td>
+            <td rowspan="2">给新格局的编码标记上$y\rightarrow\frak{kom},-3$<br><br>
+              $\begin{aligned}@@;\;D\;A\;D\;D\;C\;R\;D\;A\;A\;;\;D\;A\;A\;D\;D\;C\;C\;R\;D\;A\;\#\;
+              \\:\;DyAyDy\;\quad\mathop{\;}\limits_{\frak kom}\end{aligned}$</td>
+          </tr>
+          <tr>
+            <td>$\frak{anf_1}$</td>
+            <td>
+            <td>
+            <td>$\mathfrak{con(kom,}y\frak{)}$</td>
+          </tr>
+          <tr>
+            <td rowspan="3">$\frak{kom}$</td>
+            <td>;</td>
+            <td>R,Pz,L</td>
+            <td>$\mathfrak{con(kmp,}x\frak{)}$</td>
+            <td rowspan="3">$\frak{kom}$返回前面的配置区找到没有标记z的标准描述；<br>并将标准描述中表示配置和扫描符的编码都标记上x；<br>扫描格移至下一个D后的第一个F-格<br><br>
+              $\begin{aligned}@@;\;D\;A\;D\;D\;C\;R\;D\;A\;A\;;zDxAxAxDxD\;\mathop{C}\limits_{\frak
+              kmp}\;C\;R\;D\;A\;\#\; \\:\;DyAyDy\end{aligned}$</td>
+          </tr>
+          <tr>
+            <td>z</td>
+            <td>L,L</td>
+            <td>$\frak{kom}$</td>
+          </tr>
+          <tr>
+            <td>not z nor ;</td>
+            <td>L</td>
+            <td>$\frak{kom}$</td>
+          </tr>
+          <tr>
+            <td>$\frak{kmp}$</td>
+            <td>
+            <td>
+            <td>$\mathfrak{cpe\Big(e(e(anf,}x),y\mathfrak{),sim},x,y\mathfrak{\Big)}$</td>
+            <td>
+              $\frak{kmp}$对比被y标记的格局和被x标记的配置和扫描符，并删除标记<br>如果相同$\rightarrow\frak{sim}$；<br>如果不同$\rightarrow\frak{anf}$<br><br>
+              $\begin{aligned}@@;\;D\;A\;D\;D\;C\;R\;D\;A\;A\;;zD\;A\;A\;D\;D\;C\;C\;R\;D\;A\;\#\;
+              \\:\;D\;A\;D\;\quad\mathop{\;}\limits_{\frak anf}\end{aligned}$<br>
+              $\begin{aligned}@@;zD\;A\;D\;D\;C\;R\;D\;A\;A\;;zD\;A\;A\;D\;D\;C\;C\;R\;D\;A\;\#\;
+              \\:\;D\;A\;D\;\quad\mathop{\;}\limits_{\frak sim}\end{aligned}$</td>
+          </tr>
+          <tr>
+            <td>$\frak{sim}$</td>
+            <td>
+            <td>
+            <td>$\mathfrak{f'(sim_1,sim_1,}z\frak{)}$</td>
+            <td rowspan="6">$\frak{sim}$将操作(写入字符+移动)用u标记，将新配置用y标记，并删除标记z$\rightarrow\frak mk$<br><br>
+              $@@;\;D\;A\;D\;DuCuRuDyAyAy;\;D\;A\;A\;D\;D\;C\;C\;R\;D\;A\;\#\;:\;D\;A\;D\;\quad\mathop{\;}\limits_{\frak
+              mk}$</td>
+          </tr>
+          <tr>
+            <td>$\frak{sim_1}$</td>
+            <td>
+            <td>
+            <td>$\frak{con(sim_2,\;)}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{sim_2}$</td>
+            <td>A</td>
+            <td>
+            <td>$\frak{sim_3}$</td>
+          </tr>
+          <tr>
+            <td>not A</td>
+            <td>L,Pu,R,R,R</td>
+            <td>$\frak{sim_2}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{sim_3}$</td>
+            <td>not A</td>
+            <td>L,Py</td>
+            <td>$\mathfrak{e(mk,}z\frak{)}$</td>
+          </tr>
+          <tr>
+            <td>A</td>
+            <td>L,Py,R,R,R</td>
+            <td>$\frak{sim_3}$</td>
+          </tr>
+          <tr>
+            <td>$\frak{mk}$</td>
+            <td>
+            <td>
+            <td>$\frak{g(mk_1,:)}$</td>
+            <td rowspan="11">$\mathfrak{mk}将配置前的那个字符标记成x,再之前的字符标记为v,$<br>$扫描符和当前配置不标记,剩余的其他字符标记为w$<br><br>
+              $\begin{aligned}@@;\;D\;A\;D\;DuCuRuDyAyAy;\;D\;A\;A\;D\;D\;C\;C\;R\;D\;A\;\#\;
+              \\:\;D\;A\;D\;\mathop{:}\limits_{\frak sh}\end{aligned}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{mk_1}$</td>
+            <td>not A</td>
+            <td>R,R</td>
+            <td>$\frak{mk_1}$</td>
+          </tr>
+          <tr>
+            <td>A</td>
+            <td>L,L,L,L</td>
+            <td>$\frak{mk_2}$</td>
+          </tr>
+          <tr>
+            <td rowspan="3">$\frak{mk_2}$</td>
+            <td>C</td>
+            <td>R,Px,L,L,L</td>
+            <td>$\frak{mk_2}$</td>
+          </tr>
+          <tr>
+            <td>:</td>
+            <td>
+            <td>$\frak{mk_4}$</td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>R,Px,L,L,L</td>
+            <td>$\frak{mk_3}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{mk_3}$</td>
+            <td>not :</td>
+            <td>R,Pv,L,L,L</td>
+            <td>$\frak{mk_3}$</td>
+          </tr>
+          <tr>
+            <td>:</td>
+            <td>
+            <td>$\frak{mk_4}$</td>
+          </tr>
+          <tr>
+            <td>$\frak{mk_4}$</td>
+            <td>
+            <td>
+            <td>$\frak{con(l(l\small(mk_5)\normalsize),\;)}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{mk_5}$</td>
+            <td>Any</td>
+            <td>R,Pw,R</td>
+            <td>$\frak{mk_5}$</td>
+          </tr>
+          <tr>
+            <td>None</td>
+            <td>P:</td>
+            <td>$\frak{sh}$</td>
+          </tr>
+          <tr>
+            <td>$\frak{sh}$</td>
+            <td>
+            <td>
+            <td>$\mathfrak{f(sh_1,inst,}u\mathfrak{)}$</td>
+            <td rowspan="10">$\frak sh$在纸带上写入标记的操作要写入的数字<br><br>
+              $\begin{aligned}@@;\;D\;A\;D\;DuCuRuDyAyAy;\;D\;A\;A\;D\;D\;C\;C\;R\;D\;A\;\#\;
+              \\:\;D\;A\;D\;:\;0\;\mathop{:}\limits_{\frak inst}\end{aligned}$</td>
+          </tr>
+          <tr>
+            <td>$\frak{sh_1}$</td>
+            <td>
+            <td>L,L,L</td>
+            <td>$\frak{sh_2}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{sh_2}$</td>
+            <td>D</td>
+            <td>R,R,R,R</td>
+            <td>$\frak{sh_3}$</td>
+          </tr>
+          <tr>
+            <td>not D</td>
+            <td>
+            <td>$\frak{inst}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{sh_3}$</td>
+            <td>C</td>
+            <td>R,R</td>
+            <td>$\frak{sh_4}$</td>
+          </tr>
+          <tr>
+            <td>not C</td>
+            <td>
+            <td>$\frak{inst}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{sh_4}$</td>
+            <td>C</td>
+            <td>R,R</td>
+            <td>$\frak{sh_5}$</td>
+          </tr>
+          <tr>
+            <td>not C</td>
+            <td>
+            <td>$\frak{pe_2(inst,0,:)}$</td>
+          </tr>
+          <tr>
+            <td rowspan="2">$\frak{sh_5}$</td>
+            <td>C</td>
+            <td>
+            <td>$\frak{inst}$</td>
+          </tr>
+          <tr>
+            <td>not C</td>
+            <td>
+            <td>$\frak{pe_2(inst,1,:)}$</td>
+          </tr>
+          <tr>
+            <td>$\frak{inst}$</td>
+            <td>
+            <td>
+            <td>$\mathfrak{g(l\small(inst_1)},u\frak{)}$</td>
+            <td rowspan="6">根据移动操作，将上一个格局中被v、x和w标记的字符、<br>被u标记的要写入的字符、以及新配置写入，<br>组成新的完全格局,并擦除所有标记<br><br>
+              $\begin{aligned}
+              @@;\;D\;A\;D\;D\;C\;R\;D\;A\;A\;;\;D\;A\;A\;D\;D\;C\;C\;R\;D\;A\;\#\; \\
+              :\;D\;A\;D\;:\;0\;:\;D\;C\;D\;A\;A\;\quad\mathop{\;}\limits_{\frak anf}
+              \end{aligned}$</td>
+          </tr>
+          <tr>
+            <td>$\frak inst_1$</td>
+            <td>$\alpha$</td>
+            <td>R,E</td>
+            <td>$\frak inst_1(\alpha)$</td>
+          </tr>
+          <tr>
+            <td>$\mathfrak{inst_1(}L\frak )$</td>
+            <td>
+            <td>
+            <td>$\mathfrak{ce_5}(\mathfrak{ov},v,y,x,u,w)$</td>
+          </tr>
+          <tr>
+            <td>$\mathfrak{inst_1(}R\frak )$</td>
+            <td>
+            <td>
+            <td>$\mathfrak{ce_5}(\mathfrak{ov},v,y,x,u,w)$</td>
+          </tr>
+          <tr>
+            <td>$\mathfrak{inst_1(}N\frak )$</td>
+            <td>
+            <td>
+            <td>$\mathfrak{ec_5}(\mathfrak{ov},v,y,x,u,w)$</td>
+          </tr>
+          <tr>
+            <td>$\frak ov$</td>
+            <td>
+            <td>
+            <td>$\frak e(anf)$</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </article>
+
+    <!-- 参考文献区域 -->
+    <section class="references">
+      <h2>参考文献</h2>
+      <i>
+        <ol>
+          <li id="footnote1">Turing, A.M. (1937), On Computable Numbers,
+            with an Application to the Entscheidungsproblem.
+            Proceedings of the London Mathematical Society,
+            s2-42: 230-265. <a href="https://doi.org/10.1112/plms/s2-42.1.230">https://doi.org/10.1112/plms/s2-42.1.230</a></li>
+          <li id="footnote2">Charles Petzold. (2012).
+            图灵的秘密：他的生平、思想及论文解读 (杨卫东, 朱皓, 等, 译). 北京: 人民邮电出版社.</li>
+            <li id="footnote3">Donald W. D., Corrections to Turing's Universal Computing Machine, Copeland, B J (ed.), The Essential Turing
+              (Oxford, 2004; online edn, Oxford Academic, 12 Nov. 2020),
+              <a href="https://doi.org/10.1093/oso/9780198250791.001.0001">https://doi.org/10.1093/oso/9780198250791.001.0001</a>, accessed 8 May 2026.</li>
+        </ol>
+      </i>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>联系我</h3>
+        <p>📧 <a href="mailto:timlee20201021@163.com">timlee20201021@163.com</a></p>
+        <p>🔗 <a href="https://github.com/TimLeeYao" target="_blank">GitHub主页</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>扫码直达</h3>
+        <img src="../images/qrcode.jpg" alt="QR Code" class="qr-code">
+      </div>
+    </div>
+    <p class="copyright">© 麦田里的阅读者</p>
+  </footer>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/article-render.js"></script>
+</body>
+
+</html>

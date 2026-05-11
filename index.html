@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>麦田里的阅读者</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-left">
+      <div class="nav-icon">
+        <img src="images/icon.jpg" alt="站点图标">
+      </div>
+      <a href="index.html" class="nav-title">麦田里的阅读者</a>
+    </div>
+    <div class="nav-links">
+      <a href="notes/index.html">笔记</a>
+      <a href="reports/index.html">报告</a>
+      <a href="poems/index.html">诗歌</a>
+      <a href="tags.html">标签</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>麦田里的阅读者</h1>
+        <p><b>笔记</b>：阅读不止&emsp;<b>报告</b>：思考不辍&emsp;<b>诗歌</b>：语言边界</p>
+      </div>
+      <div class="hero-image-wrapper">
+        <img src="images/hero.jpg" alt="精选图片" class="hero-image">
+      </div>
+    </section>
+
+    <h1>最新文章</h1>
+    <div id="latest-posts"></div>
+    <h2 style="margin-top:3rem;">标签云</h2>
+    <div id="tag-cloud"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>联系我</h3>
+        <p>📧 <a href="mailto:timlee20201021@163.com">timlee20201021@163.com</a></p>
+        <p>🔗 <a href="https://github.com/TimLeeYao" target="_blank">GitHub主页</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>扫码直达</h3>
+        <img src="images/qrcode.jpg" alt="QR Code" class="qr-code">
+      </div>
+    </div>
+    <p class="copyright">© 麦田里的阅读者</p>
+  </footer>
+
+  <script src="js/articles.js"></script>
+  <script>
+    (function () {
+      const articles = window.BLOG_ARTICLES;
+      // function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+      function formatDate(d) {
+        if (!d) return '';
+        return new Date(d).toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' });
+      }
+
+      // const categories = ['notes', 'reports', 'poems'];
+      // const latestHTML = categories.map(cat => {
+      //   const posts = articles
+      //     .filter(a => a.category === cat)
+      //     .sort((a, b) => new Date(b.date) - new Date(a.date))
+      //     .slice(0, 3);
+      //   return `
+      //     <section class="category-section">
+      //       <h2 class="category-title"><a href="${cat}/index.html">${capitalize(cat)}</a></h2>
+      //       <ul class="post-list">
+      //         ${posts.map(p => `
+      //           <li>
+      //             <a href="${p.url}" class="post-link">
+      //               <span class="post-title">${p.title}</span>
+      //               <span class="post-date">${formatDate(p.date)}</span>
+      //             </a>
+      //           </li>`).join('')}
+      //       </ul>
+      //       ${articles.filter(a => a.category === cat).length > 3
+      //       ? `<a href="${cat}/index.html" class="view-all">查看全部 →</a>` : ''}
+      //     </section>`;
+      // }).join('');
+      const categories = [
+        { key: '笔记', folder: 'notes' },
+        { key: '报告', folder: 'reports' },
+        { key: '诗歌', folder: 'poems' }
+      ];
+
+      const latestHTML = categories.map(({ key, folder }) => {
+        const posts = articles
+          .filter(a => a.category === key)
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 3);
+        return `
+    <section class="category-section">
+      <h2 class="category-title"><a href="${folder}/index.html">${key}</a></h2>
+      <ul class="post-list">
+        ${posts.map(p => `
+          <li>
+            <a href="${p.url}" class="post-link">
+              <span class="post-title">${p.title}</span>
+              <span class="post-date">${formatDate(p.date)}</span>
+            </a>
+          </li>`).join('')}
+      </ul>
+      ${articles.filter(a => a.category === key).length > 3
+            ? `<a href="${folder}/index.html" class="view-all">查看全部 →</a>` : ''}
+    </section>`;
+      }).join('');
+      document.getElementById('latest-posts').innerHTML = latestHTML;
+
+      const tagCount = {};
+      articles.forEach(a => a.tags.forEach(t => tagCount[t] = (tagCount[t] || 0) + 1));
+      const tagHTML = Object.entries(tagCount)
+        .sort(([, a], [, b]) => b - a)
+        .map(([tag, count]) =>
+          `<a href="tags.html?tag=${encodeURIComponent(tag)}" class="tag-item">${tag} (${count})</a>`
+        ).join('');
+      document.getElementById('tag-cloud').innerHTML = `<div class="tags">${tagHTML}</div>`;
+    })();
+  </script>
+  <script src="js/theme.js"></script>
+</body>
+
+</html>

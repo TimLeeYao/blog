@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>标签 - 我的博客</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-left">
+      <div class="nav-icon">
+        <img src="images/icon.jpg" alt="站点图标">
+      </div>
+      <a href="index.html" class="nav-title">我的博客</a>
+    </div>
+    <div class="nav-links">
+      <a href="notes/index.html">笔记</a>
+      <a href="reports/index.html">报告</a>
+      <a href="poems/index.html">诗歌</a>
+      <a href="tags.html">标签</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1 id="tag-heading">标签文章</h1>
+    <div id="tag-cloud"></div>
+    <div id="filtered-posts"></div>
+    <div id="pagination" class="pagination"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>联系我</h3>
+        <p>📧 <a href="mailto:timlee20201021@163.com">timlee20201021@163.com</a></p>
+        <p>🔗 <a href="https://github.com/TimLeeYao" target="_blank">个人主页</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>扫码直达</h3>
+        <img src="images/qrcode.jpg" alt="QR Code" class="qr-code">
+      </div>
+    </div>
+    <p class="copyright">© 麦田里的阅读者</p>
+  </footer>
+
+  <script src="js/articles.js"></script>
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const tagFilter = params.get('tag');
+      const currentPage = parseInt(params.get('page')) || 1;
+      const perPage = 5;
+      const articles = window.BLOG_ARTICLES;
+
+      function formatDate(d) {
+        if (!d) return '';
+        return new Date(d).toLocaleDateString('zh-CN', { year:'numeric', month:'2-digit', day:'2-digit' });
+      }
+
+      // 标签云
+      const tagCount = {};
+      articles.forEach(a => a.tags.forEach(t => tagCount[t] = (tagCount[t] || 0) + 1));
+      const tagHTML = Object.entries(tagCount)
+        .sort(([,a], [,b]) => b - a)
+        .map(([tag, count]) => 
+          `<a href="tags.html?tag=${encodeURIComponent(tag)}" class="tag-item ${tag === tagFilter ? 'active' : ''}">${tag} (${count})</a>`
+        ).join('');
+      document.getElementById('tag-cloud').innerHTML = `<div class="tags">${tagHTML}</div>`;
+
+      // 文章过滤与分页
+      let displayArticles;
+      if (tagFilter) {
+        document.getElementById('tag-heading').textContent = `标签: ${tagFilter}`;
+        displayArticles = articles
+          .filter(a => a.tags.includes(tagFilter))
+          .sort((a, b) => new Date(b.date) - new Date(a.date));
+      } else {
+        document.getElementById('tag-heading').textContent = '所有文章';
+        displayArticles = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
+      }
+
+      const totalPages = Math.ceil(displayArticles.length / perPage);
+      let page = currentPage;
+      if (page < 1) page = 1;
+      if (page > totalPages) page = totalPages;
+      const start = (page - 1) * perPage;
+      const paged = displayArticles.slice(start, start + perPage);
+
+      document.getElementById('filtered-posts').innerHTML = displayArticles.length
+        ? `<ul class="post-list">${paged.map(p => `
+            <li>
+              <a href="${p.url}" class="post-link">
+                <span class="post-title">${p.title}</span>
+                <span class="post-date">${formatDate(p.date)}</span>
+              </a>
+              <div class="article-tags">
+                ${p.tags.map(t => `<a href="tags.html?tag=${encodeURIComponent(t)}" class="tag-item small">${t}</a>`).join('')}
+              </div>
+            </li>`).join('')}</ul>`
+        : '<p>没有找到相关文章。</p>';
+
+      // 分页器
+      if (totalPages > 1) {
+        let pagHTML = '';
+        for (let i = 1; i <= totalPages; i++) {
+          const href = tagFilter 
+            ? `tags.html?tag=${encodeURIComponent(tagFilter)}&page=${i}` 
+            : `tags.html?page=${i}`;
+          if (i === page) {
+            pagHTML += `<span class="current">${i}</span>`;
+          } else {
+            pagHTML += `<a href="${href}">${i}</a>`;
+          }
+        }
+        document.getElementById('pagination').innerHTML = pagHTML;
+      }
+    })();
+  </script>
+  <script src="js/theme.js"></script>
+</body>
+</html>
