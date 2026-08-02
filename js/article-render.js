@@ -5,7 +5,7 @@ window.MathJax = {
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['$$', '$$'], ['\\[', '\\]']],
-    processEscape: true //支持 \$ 显示美元符号，避免冲突
+    processEscapes: true //支持 \$ 显示美元符号，避免冲突
   }
 };
 
@@ -17,8 +17,14 @@ document.head.appendChild(mathjaxScript);
 // ---------- Mermaid ----------
 var mermaidScript = document.createElement('script');
 mermaidScript.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
-mermaidScript.onload = function() {
-  mermaid.initialize({ startOnLoad: true, theme: 'default' });
+mermaidScript.onload = function () {
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      // 留空，让 CSS 接管所有颜色
+    }
+  });
 };
 document.head.appendChild(mermaidScript);
 
@@ -117,7 +123,7 @@ function createTableOfContents() {
     const toggle = document.createElement('span');
     toggle.className = 'toc-toggle';
     toggle.innerHTML = '▶';
-    toggle.onclick = function(e) {
+    toggle.onclick = function (e) {
       e.stopPropagation();
       const childDiv = h4Anchor.parentElement.querySelector('.toc-children');
       if (childDiv) {

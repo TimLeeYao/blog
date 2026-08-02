@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>无限集合 - 麦田里的阅读者</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-left">
+      <div class="nav-icon">
+        <img src="../images/icon.jpg" alt="站点图标">
+      </div>
+      <a href="../index.html" class="nav-title">麦田里的阅读者</a>
+    </div>
+    <div class="nav-links">
+      <a href="../notes/index.html">笔记</a>
+      <a href="../reports/index.html">报告</a>
+      <a href="../poems/index.html">诗歌</a>
+      <a href="../tags.html">标签</a>
+    </div>
+  </nav>
+
+  <main class="container article">
+    <a href="index.html" class="back-link">← 返回列表</a>
+    <h1 class="article-title">数理逻辑入门（1）——无限集合</h1>
+    <div class="article-meta">
+      <span class="article-date">2026-05-26</span>
+      <div class="article-tags">
+        <a href="../tags.html?tag=数理逻辑" class="tag-item small">数理逻辑</a>
+        <a href="../tags.html?tag=集合论" class="tag-item small">集合论</a>
+      </div>
+    </div>
+
+    <!-- 摘要区域 -->
+    <section class="summary">
+      <h2>摘要</h2>
+      <p><!-- 在这里撰写文章摘要 --></p>
+    </section>
+
+    <article class="content">
+      <h2>1. 无限集合</h2>
+      <p>如果对于集合$A$，存在正整数$n$，使得$A$中的元素能与从1到$n$的整数建立一一对应的关系，那么就可以说集合$A$有$n$个元素。像集合$A$这样的集合就是<span class="kaitiB">有限集合(<i>finite set</i>)</span>。反之，如果对于集合$B$，不存在任何这样的正整数$n$，那么集合$B$就是<span class="kaitiB">无限集合(<i>infinite set</i>)</span></p>
+      <h2>2. 集合的大小</h2>
+      <p>集合中元素的个数称作<span class="kaitiB">基数(<i>cardinal number</i>)</span>，也叫<span class="kaitiB">势(<i>cardinality</i>)</span>；具如果集合$A$与集合$B$的基数相同，则$A$与$B$<span class="kaitiB">等势(<i>equinumerous</i>)</span><sup><a href="#footnote1">1</a></sup>。对于有限集合$A$和$B$，如果它们的元素之间能一一对应，那么集合$A$和集合$B$等势；如果集合$A$只能与集合$B$的真子集建立一一对应的关系，那么集合$A$就比集合$B$小。</p>
+      <h3>2.1 无限集合的基数</h3>
+      <p>但是对于无限集合，以上比较集合的势的大小的规则不起作用，比如：偶数集合$E=\{0, 2, 4, \cdots, e\}$和奇数集合$O=\{1, 3, 5, \cdots, o\}$都为无限集合；但是$E$能与$O$的真子集$\{5, 7, 9, \cdots, e+5\}$一一对应($0\leftrightarrow5, 2\leftrightarrow7, 4\leftrightarrow9, \cdots, e\leftrightarrow e+5$)；同时，$O$也能与$E$的真子集$\{4, 6, 8, \cdots, o+3\}$一一对应。</p>
+      <p>而且，更奇怪的是，无限集合甚至能与自己的真子集一一对应：<ul>
+        <li>自然数集与正整数集：$$\begin{aligned}&0\leftrightarrow 1 \\ &1\leftrightarrow 2 \\ &2\leftrightarrow 3 \\ &\cdots \\ &n \leftrightarrow n+1\end{aligned}$$</li>
+        <li>自然数集与偶数集：$$\begin{aligned}&0\leftrightarrow 0 \\ &1\leftrightarrow 2 \\ &2\leftrightarrow 4 \\ &\cdots \\ &n \leftrightarrow 2n\end{aligned}$$</li>
+        <li>自然数集与完全平方数：$$\begin{aligned}&0\leftrightarrow 0 \\ &1\leftrightarrow 1 \\ &2\leftrightarrow 4 \\ &\cdots \\ &n \leftrightarrow n^2\end{aligned}$$</li>
+      </ul></p>
+      <p>这一发现似乎打破了“整体大于部分”的规律。</p>
+      <h3>2.2 幂集</h3>
+      <p>由任一集合$A$的所有子集构成的集合被称为集合$A$的<span class="kaitiB">幂集(<i>power set</i>)</span>，记为$\mathcal{P}(A)$。如果有限集合$A$有$n$个元素，那么它的幂集$\mathcal{P}(A)$有多少个元素呢？或者说$\mathcal{P}(A)$的基数为多少？</p>
+      <p>对于任一基数为$n$的有限集合$I_n$，我们可以将集合中的第$n$个元素，记为$a_n$，则$I_n$就可记为$\{a_1, a_2, a_3, \cdots, a_n\}$。现在，往$I_n$中添加一个元素$a_{n+1}$得到新集合$I_{n+1}=\{a_1, a_2, a_3, \cdots, a_n, a_{n+1}\}$。若$I_n$的幂集$\mathcal{P}(I_n)$的基数为$k$，记为$\{S_1, S_2, S_3, \cdots, S_k\}$；那么$\mathcal{P}(I_n)$中的所有元素肯定也是$I_{n+1}$的子集，而且除此之外，$I_{n+1}$的子集还包括$S_1 \cup {a_{n+1}}, S_2 \cup {a_{n+1}}, S_3 \cup {a_{n+1}}, \cdots, S_k \cup {a_{n+1}}$等，即$I_n$的所有子集分别与新增元素$a_{n+1}$的并集。因此，$I_{n+1}$的幂集$\mathcal{P}(I_{n+1})$有$2k$个元素；也就是说每增加一个元素，集合幂集的基数就成倍增加。而基数为1的集合$I_1$，其幂集$\mathcal{P}(I_1)=\big\{\emptyset, \{a_1\}\big\}$的基数为2；因此集合$I_2$的幂集$\mathcal{P}(I_2)=\big\{\emptyset, \{a_1\}, \{a_2\}, \{a_1, a_2\}\big\}$的基数就为$2\times2=4$；依此类推，$I_n$的幂集$\mathcal{P}(I_n)$的基数就是$2^n$。</p>
+      <p>至此，上面的问题就有了答案：基数为$n$的集合，其幂集的基数为$2^n$。</p>
+      <h2>3. 可数集合</h2>
+      <p>如果一个集合中的元素能和正整数建立一一对应的关系，那么这个集合就是<span class="kaitiB">可数集合(<i>denumerable set</i>)</span>；如果这个集合同时还是一个无限集合，那么它就是<span class="kaitiB">可数无限(<i>denumerably infinite</i>)</span>的。这种一一对应的关系称为集合的<span class="kaitiB">列举(<i>enumeration</i>)</span>。与集合中的元素一一对应的每个正整数$1, 2, 3, \cdots , n$被称为其对应元素的<span class="kaitiB">索引(<i>index</i>)</span>。</p>
+      <p>“可数无限”这个词看起来很矛盾：无限还能可数吗？这正是康托尔的发现。他证明了一些无限集合是可数的！其中诀窍就是上述的一一对应，或者说列举。接下来将证明常见的一些无限集合是可数集合。</p>
+      <h3>3.1 整数集</h3>
+      <P>要想列举所有的整数，可能有人会想到先列举所有正整数，然后列举所有负整数。但这是不可能的，因为无论是正整数集还是负整数集都是不可数的，也就是说，无论你先列举哪一个，你都永远不可能列举完，因此永远也无法开始列举另外一个集合。所以这种方法是行不通的。</P>
+      <p>可行的方法是：先列举绝对值为1的所有整数，即$+1$和$-1$，然后列举绝对值为2的所有整数，依次类推：$$\begin{aligned}|n|=1\leftrightarrow&+1,-1\\|n|=2\leftrightarrow&+2,-2\\|n|=3\leftrightarrow&+3,-3\\ \cdots \\|n|=k\leftrightarrow&+k,-k\end{aligned}$$</p>
+      <p>或者可以想象有人从整数集合中任意取了一个元素，而你需要猜出这个元素是哪个整数；最通用的一个方法就是从$+1$和$-1$开始依次交替列举一个正整数和它的相反数。这样，你才能完全保证你最终能够猜出那个整数（假设可以无限地猜下去）。如果这个数是$-k$，那么你在第$2k$次就能猜出来；如果这个数是$+k$，那么你在第$2k-1$次就能猜出来。</p>
+      <h3>3.2 正整数对集合</h3>
+      <p>正整数对$(a,b)$由2个正整数组成，这2个正整数可以相等，即$a=b$。$a$有无限种可能，而且在每一个$a$的可能下，又有无限种可能的$b$。有人可能会说，先把$a=1$的情况都列举出来，即$(1,1),(1,2),(1,3),\cdots,(1,n)$，但是就像前面说的，这是不可能的，$a=1$的情况永远也不会列举完。</p>
+      <p>可行的方法是：先列举整数对中最大的整数为1的情况，然后列举最大的整数为2的情况，依次类推：$$\begin{aligned}\max_{(a,b)}=1\leftrightarrow&(1,1) \\ \max_{(a,b)}=2\leftrightarrow&(1,2),(2,2),(2,1)\\ \max_{(a,b)}=3\leftrightarrow&(1,3),(2,3),(3,3),(3,1),(3,2)\\ \cdots\\ \max_{(a,b)}=n\leftrightarrow& 2n-1个整数对\end{aligned}$$</p>
+      <p>这样，如果整数对中的最大整数为$n$，那么你最多猜$n^2$次就能猜出这个整数对分别由哪2个整数组成。因为每种情况包含的整数对的个数构成了等差数列$1,3,5,7,9,\cdots, 2n-1$，等差数列的和为$n^2$。</p>
+      <h3>3.3 有理数集</h3>
+      <p>有理数其实就是整数分式，即$\frac{a}{b}$，其中$a,b\in Z,b\neq0$。这样的分式包含了整数、小数以及无限循环小数。因为任何无限循环小数，都可以表示为其循环部分比上与之同位数的由9组成的整数。比如，$0.33333333\cdots=\frac{3}{9}=\frac{1}{3}$；又有$0.14351435\cdots=\frac{1435}{9999}$。</p>
+      <p>我们先来看正有理数。要列举所有的正有理数，或者说列举所有的正整数分式，可行的方法与列举正整数对的方法类似。毕竟，将正整数对中的两个整数分别放在分号上下，就组成了整数分式。所以，列举正有理数的方式如下：先列举所有分子分母中最大的整数为1的情况，然后列举最大的整数为2的情况，依此类推：$$\begin{aligned}\max_{a,b}=1\leftrightarrow&\frac{1}{1} \\ \max_{a,b}=2\leftrightarrow&\frac{1}{2},\frac{2}{2},\frac{2}{1} \\ \max_{a,b}=3\leftrightarrow&\frac{1}{3},\frac{2}{3},\frac{3}{3},\frac{3}{1},\frac{3}{2}\\ \cdots\\ \max_{a,b}=n\leftrightarrow&2n-1个整数分式\end{aligned}$$</p>
+      <p>这样就列举出了所有的正有理数。至于如何同时列举负有理数，则可以参考列举整数的方法，即正负数交替列举。比如：$$\begin{aligned}&\frac{1}{1},-\frac{1}{1} \\ &\frac{1}{2}, -\frac{1}{2}, \frac{2}{2}, -\frac{2}{2}, \frac{2}{1}, -\frac{2}{1} \\ &\frac{1}{3}, -\frac{1}{3}, \frac{2}{3}, -\frac{2}{3}, \frac{3}{3}, -\frac{3}{3}, \frac{3}{1}, -\frac{3}{1}, \frac{3}{2}, -\frac{3}{2} \\ &\cdots \end{aligned}$$</p>
+      <p>接着再加上0，那么所有的有理数都被列举了。现在，我们可以说有理数集合是可数的，即使有理数有无穷多个！</p>
+      <h3>3.4 正整数有限集组成的集合</h3>
+      <p>显然，由正整数组成的有限集合有无限多个。那是否可以将这些集合一一列举出来呢？列举由正整数组成的有限集合的方法是列举正整数对的方法的扩展，只不过要加上§2.2中关于幂集的基数的结论。具体方法如下：</p>
+      <p>因为是有限集合，所以集合中肯定存在最大的元素，因此我们仍然可以用根据最大值进行列举的方法。先列举集合中最大的元素为1的所有集合，即$\{1\}$；然后列举最大元素为2的所有集合，即$\{2\},\{1,2\}$，也就相当于集合$\{1,2\}$的所有子集(共$2^2$个子集)减去$\emptyset$和前面已经列举的$\{1\}$，即减去集合$\{1\}$的所有子集(包括$\emptyset$和$\{1\}$，共$2^1$个子集)；依此类推：$$\begin{aligned}\max_{x \in A_1}=1\leftrightarrow&\{1\} \\ \max_{x \in A_2}=2\leftrightarrow&\{2\},\{1,2\}\\ \max_{x \in A_3}=3\leftrightarrow&\{3\},\{1,3\},\{2,3\},\{1,2,3\}\\ \cdots\\ \max_{x \in A_n}=n\leftrightarrow& 2^n-2^{n-1}=2^{n-1}个集合\end{aligned}$$</p>
+      <h3>3.5 正整数集的幂集</h3>
+      <p>我们已经证明了正整数有限集组成的集合是可数的，由此推广出去，由所有正整数集合组成的集合，无论是有限集合还是无限集合，是否可数呢？</p>
+      <p>我们先假设这些集合组成的集合是可数的。那么这些集合就能与正整数一一对应：$$\begin{aligned}1&\leftrightarrow S_1 \\ 2&\leftrightarrow S_2 \\ 3&\leftrightarrow S_3 \\ &\cdots \\ n&\leftrightarrow S_n\end{aligned}$$现在我们构造一个集合$S$：对于正整数$n$对应的集合$S_n$，如果正整数$n$属于集合$S_n$，我们就称之为<span class="kaitiB">特殊数(<i>extraordiniary number</i>)</span>；如果正整数$n$不属于$S_n$，我们就将它称为<span class="kaitiB">普通数(<i>ordinary number</i>)</span>，并将它放入集合$S$。</p>
+      <p>然后我们来检验集合$S$是否是$S_1, S_2, S_3, \cdots, S_n$中的某一个。首先，$S$肯定和$S_1$不同，因为如果$1$如果属于$S_1$，那$S$中就没有$1$，反之，如果$1$不属于$S_1$，那它就会出现$S$中，无论哪种情况，$S$和$S_1$都不会相同，因为$1$要么属于$S$、要么属于$S_1$。依此类推，$2$也不会同时出现在$S$和$S_2$中，$n$也不会同时出现在$S$和$S_n$中。因此$S$和$S_1, S_2, S_3, \cdots, S_n$中的每一个都不相同。</p>
+      <p>于是，矛盾就产生了。因为我们一开始假设包含了所有由正整数组成的集合的集合是可数的，并与正整数建立了一一对应的关系$\{S_1, S_2, S_3, \cdots, S_n\}$。但是我们又发现了一个不属于$\{S_1, S_2, S_3, \cdots, S_n\}$的集合$S$。说明$\{S_1, S_2, S_3, \cdots, S_n\}$并没有包含所有由正整数组成的集合，换句话说所有由正整数组成的集合并没有被列举完。所以，所有正整数集合组成的集合是不可数的。</p>
+      <h2>4. 康托尔定理</h2>
+      <p>§3.4和§3.5中的问题也可以表述为：正整数集$N^+$的幂集$\mathcal{P}(N^+)$是不可数的；但是$\mathcal{P}(\mathbf{N^+})$的子集——正整数有限集组成的集合$\mathcal{F}$，是可数的。换句话说，正整数$\mathbf{N^+}$不能和$\mathcal{P}$一一对应，但是却能和它的子集$\mathcal{F}$一一对应。这就说明$\mathcal{P}$的大小超过了任何正整数。将它推广到任意集合就是<span class="kaitiB">康托尔定理(<i>Cantor's Theorem</i>)</span>：对于任一集合$A$，其幂集$\mathcal{P}(A)$的基数要大于集合$A$的基数。</p>
+    <p>证明康托尔定理的方法与上面证明所有正整数集不可数的方法是类似的。对于任一无限集合$A=\{a_1, a_2, a_3, \cdots, a_x\}$，假设其幂集$\mathcal{P}$与集合$A$大小相同，那么$\mathcal{P}$可记为$\{S_{a_1}, S_{a_2}, S_{a_3}, \cdots, S_{a_x}\}$，其中的元素$S_{a_1}, S_{a_2}, S_{a_3}, \cdots, S_{a_x}$，与$A$中的元素$a_1, a_2, a_3, \cdots, a_x$一一对应。同样，构造集合$S$。如果$a_x$不属于$S_{a_x}$，就称之为普通元素，并将其放入集合$S$；否则，称之为特殊元素。这样，新构造的集合$S$就与幂集中的任何元素都不同。假设被推翻，集合$A$中的元素并不能与其幂集$\mathcal{P}$中的元素一一对应。但是$\mathcal{P}$的子集$\{\{a_1\}, \{a_2\}, \{a_3\}, \cdots, \{a_x\}\}$能够与集合$A=\{a_1, a_2, a_3, \cdots, a_x\}$一一对应。所以证得，对于任意无限集合，$\mathcal{P}$的基数要大于$A$的基数。另外，对于任意有限集合$B$，如果它的基数为$b$，即包含$b$个元素，那么其幂集$\mathcal{P}$的基数为$2^b>b$。而对于空集，它的基数为0，而它的幂集$\{\emptyset\}$的基数为1>0。因此，最终证得：对于所有集合，其幂集的基数永远大于它自身的基数。</p>
+      <h2>5. 连续统问题</h2>
+      <p>自然数集$\mathbb{N}$的幂集$\mathcal{P}(\mathbb{N})$被称为<span class="kaitiB">连续统(<i>continuum</i>)</span>，它被认为与直线上的点一一对应。根据康托尔定理，$\mathcal{P}(\mathbb{N})$的基数大于$\mathbb{N}$的基数，但是到底大多少呢？在它们之间会有别的集合，其基数既比$\mathcal{P}(\mathbb{N})$的基数小，又比$\mathbb{N}$的基数大吗？康托尔认为不存在这样的集合。这就是<span class="kaitiB">连续统猜想(<i>continuum hypothesis</i>)</span>。推而广之，康托尔认为，对于任意的无限集合$A$，以及它的幂集$\mathcal{P}(A)$，不存在基数在它们的基数之间的另一个集合。这就是<span class="kaitiB">一般化的连续统猜想(<i>generalized continuum hypothesis</i>)</span>。</p>
+      <p>时至今日，连续统猜想也没有被证明。但是，在20世纪30年代，库尔特·哥德尔(Kurt Gödel)发现在当今的数学系统中，连续统猜想是不可证伪的；后来在60年代，保罗·寇恩(Paul Cohen)发现了连续统猜想是不可证实的。因此，现有的集合论公理系统不足够解决连续统猜想的问题。<span class="kaitiB">形式主义者(<i>formalists</i>)</span>认为这表明连续统猜想本身既不为真也不为假，其真假取决于所使用的公理系统。<span class="kaitiB">柏拉图主义者(<i>Platonists</i>)</span>则相信连续统的问题是独立于公理系统的，一般化的连续统猜想自身的真伪性，只是我们还没有找到证明的方法。</p>
+      <h2>6. 关于可数集合的其他问题</h2>
+      <h3>6.1 可数集合的并集</h3>
+      <p>2个可数集合的并集也一定可数？答案是肯定的。假设这两个可数集合分别为$A=\{a_1, a_2, a_3, \cdots, a_n, \cdots \}$和$B=\{b_1, b_2, b_3, \cdots, b_n, \cdots \}$。要列举$A \cup B$中的所有元素，只需要按顺序交替列举$A$和$B$中的元素即可：$a_1, b_1, a_2, b_2, \cdots, a_n, b_n, \cdots$。</p>
+      <p>因此，可得出结论：2个可数集合的并集也是可数集合。</p>
+      <p>在§3.4中，我们已经证得正整数有限集组成的集合$\mathcal{F}$是可数的，但是所有正整数集组成的集合，即正整数集的幂集$\mathcal{P}(\mathbf{N^+})$，是不可数的。因此，根据上面的结论，正整数无限集组成的集合$\mathcal{I}$是不可数的。因为，如果$\mathcal{F}$和$\mathcal{I}$都可数的话，那它们的并集$\mathcal{F}\cup\mathcal{I}=\mathcal{P}$也就可数，那么就产生矛盾了。所以$\mathcal{I}$不可数。</p>
+      <p>不仅2个可数集合的并集是可数的，可数个可数集合的并集也是可数的。假设这些可数集合组成了一个可数的序列$D_1, D_2, D_3, \cdots, D_n, \cdots$，序列中第$n$个集合$D_n$中的元素标记为$d_n(1), d_n(2), d_n(3), \cdots, d_n(m), \cdots$。如果不考虑重复的话，序列中所有集合的并集$D$中的元素则为：$$\begin{aligned}&d_1(1), d_1(2), d_1(3), \cdots, d_1(m), \cdots\\ &d_2(1), d_2(2), d_2(3), \cdots, d_2(m), \cdots \\ &d_3(1), d_3(2), d_3(3), \cdots, d_3(m), \cdots \\ &\cdots \\ &d_n(1), d_n(2), d_n(3), \cdots, d_n(m), \cdots \\ &\cdots\end{aligned}$$。要列举序列中的所有元素，可以先列举$n$和$m$的最大值为1的所有情况，即$d_1(1)$，然后列举最大值为2的所有情况，依次类推：$$\begin{aligned}\max_{m,n}=1&\leftrightarrow d_1(1) \\ \max_{m,n}=2&\leftrightarrow d_1(2), d_2(1), d_2(2) \\ \max_{m,n}=3&\leftrightarrow d_1(3), d_2(3), d_3(1), d_3(2), d_3(3) \\ &\cdots \\ \max_{m,n}=k&\leftrightarrow 2k-1个元素\end{aligned}$$这样就列举了序列中的所有元素。但是，要列举并集$D$中的所有元素，还需要在以上步骤的每一步中去除重复值，因为序列中的集合并没有规定是不存在交集的。这样一来，第$k$次列举的元素的个数就不会超过$2k-1$。因此，所有可数集合$D_1, D_2, D_3, \cdots, D_n, \cdots$的并集$D$是可数的。</p>
+      <h3>6.2 可数集合的子集</h3>
+      <p>由§3.4中的证明可知，正整数的有限子集组成的集合是可数集合。那么任意可数集合的有限子集组成的集合也是可数集合。因为任何可数集合都可以和正整数集建立一一对应的关系。又由§6.2的证明可知，正整数集的无限子集组成的集合是不可数的，因此任意可数集合的无限子集组成的集合是不可数的。但是可数集合的任意无限子集本身是可数的。</p>
+      <p>对于任意可数集合$D=\{d_1, d_2, d_3, \cdots, d_n, \cdots\}$，其无限子集$B=\{b_1, b_2, b_3, \cdots, b_n, \cdots\}$中的元素必定是集合$D$中的某个元素$d_k$，因此集合$B$又可以标记为$\{d_{k_1}, d_{k_2}, d_{k_3}, \cdots, d_{k_m}, \cdots\}$，每个元素的下标$k_m$可以和集合$D$中某个元素的下标$n$建立一一对应的关系。因此，$B$中的元素可以和正整数$n$建立一一对应的关系，因此集合$B$是可数的。至此，证得：可数集合的任意子集也是可数的。</p>
+      <h3>6.3 有限序列和无限序列</h3>
+      <p>对于任意基数为$m$的有限集合$F$，由它的元素组成的共有$k$个元素的序列（允许重复）共有$m^k$个（序列中的每个元素都有$m$种可能的取值）。那么对于可数集合$D$，用它的前$n$个元素$\{d_1, d_2, d_3, \cdots, d_n\}$组成共有$k$个元素的序列，并且序列中必须至少出现一次元素$d_n$。同样，这样的序列有$n^k$个，我们将这样的序列组成的集合标记为$(S_k)_n$，其基数为$n^k$。按照这种方法，我们可以构造出所有这样的集合：$(S_k)_1, (S_k)_2, (S_k)_3, \cdots, (S_k)_n, \cdots$。这些集合中的序列都包含$k$个元素，且这些集合都是有限集合，因为它们的基数$n^k$是确定的。另外，这些集合都互不相同，因为只有$(S_k)_1$中的序列包含$a_1$、只有$(S_k)_2$中的序列包含$a_2$……我们将这些集合中的所有序列，即所有包含$k$个元素的序列，组成的集合标记为$S_k$，那么$S_k$是可数的。因为我们可以列举出$S_k$的所有元素——只需要先列举出所有包含元素$d_1$的序列，即集合$(S_k)_1$中的$1^k$个序列；然后列举出所有包含元素$d_2$的序列，即集合$(S_k)_2$中的$2^k$个序列……依此类推，元素$S_1, S_2, S_3, \cdots, S_k, \cdots$都是可数的。又由§6.1可知，可数集合的并集也是可数集合，所以可数集合$D$的所有有限序列组成的集合，也就是集合$S_1, S_2, S_3, \cdots, S_k, \cdots$的并集，也是可数的。</p>
+      <p>由§3.5中的证明可知，正整数集的幂集$\mathcal{P}(\mathbb{N^+})$是不可数的。现在构造这样一种无限序列$\theta$，如果对于$\mathcal{P}(\mathbb{N^+})$中的任一集合$S$，如果正整数集中的第$n$个元素，也就是正整数$n$，出现在该集合中，那么$\theta$的第$n$位就标记为1；如果$n$没有出现在$S$中，$\theta$的第$n$位就标记上0。比如于正整数无限子集$\{1,3,5,7,9,\cdots\}$对应的序列为$101010101010101\cdots$。这样无限序列$\theta$就和$\mathcal{P}(\mathbb{N^+})$中的所有子集分别建立了一一对应的关系，因此它们的基数相同，换句话说，由0和1组成的无限序列与正整数幂集等势。</p>
+  </article>
+
+    <!-- 参考文献区域 -->
+    <section class="references">
+      <h2>参考文献</h2>
+      <i>
+        <ol>
+          <li><!-- 引用 1 --></li>
+          <li><!-- 引用 2 --></li>
+        </ol>
+      </i>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>联系我</h3>
+        <p>📧 <a href="mailto:timlee20201021@163.com">timlee20201021@163.com</a></p>
+        <p>🔗 <a href="https://github.com/TimLeeYao" target="_blank">GitHub主页</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>扫码直达</h3>
+        <img src="../images/qrcode.jpg" alt="QR Code" class="qr-code">
+      </div>
+    </div>
+    <p class="copyright">© 2025 我的博客</p>
+  </footer>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/article-render.js"></script>
+</body>
+
+</html>

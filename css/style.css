@@ -23,8 +23,10 @@
   --c-text-light: #555;
   --c-border: #ccc;
   --c-code-bg: #f4f4f4;
-  --font-serif: 'Source Han Serif SC', 'Noto Serif CJK SC', 'STSong', 'SimSun', 'Songti SC', 'NSimSun', 'FangSong', 'KaiTi', 'Georgia', 'Times New Roman', serif;
-  --font-sans: 'Source Han Sans SC', 'Noto Sans CJK SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Heiti SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* --font-serif: 'Source Han Serif SC', 'Noto Serif CJK SC', 'STSong', 'SimSun', 'Songti SC', 'NSimSun', 'FangSong', 'KaiTi', 'Georgia', 'Times New Roman', serif;
+  --font-sans: 'Source Han Sans SC', 'Noto Sans CJK SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Heiti SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; */
+  --font-serif: 'Times New Roman', 'Georgia', 'Source Han Serif SC', 'Noto Serif CJK SC', 'STSong', 'SimSun', 'Songti SC', 'NSimSun', 'FangSong', 'KaiTi', serif;
+  --font-sans: 'Times New Roman', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'Source Han Sans SC', 'Noto Sans CJK SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Heiti SC', sans-serif;
   --max-width: 800px;
   --line-height: 1.7;
 }
@@ -120,59 +122,6 @@ body {
     font-size: 0.85rem;
   }
 }
-
-/* ===== Hero 区（首页） ===== */
-/* .hero {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 2rem;
-  align-items: center;
-  margin-bottom: 3rem;
-  padding: 1.5rem 0 2rem;
-  border-bottom: 1px solid var(--c-border);
-}
-
-.hero-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.hero-text h1 {
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: var(--c-accent);
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.02em;
-  line-height: 1.2;
-}
-
-.hero-text p {
-  font-size: 1.1rem;
-  color: var(--c-text-light);
-  line-height: 1.7;
-  max-width: 90%;
-}
-
-.hero-image-wrapper {
-  overflow: hidden;
-  border-radius: 6px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hero-image-wrapper:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.1);
-}
-
-.hero-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  max-height: 360px;
-}*/
 
 @media (max-width: 900px) {
   .hero {
@@ -459,10 +408,6 @@ body {
   hyphens: auto;
 }
 
-/* .content p + p {
-  text-indent: 1.5em;
-} */
-
 .content blockquote {
   margin: 1.5rem 0;
   padding: 0.8rem 1.2rem;
@@ -520,17 +465,26 @@ body {
   border-bottom-color: var(--c-accent);
 }
 
-/* .content img {
-  max-width: 100%;
-  height: auto;
-  margin: 1.5rem 0;
-} */
-
 .content img {
   display: block;
   max-width: 100%;
   height: auto;
   margin: 1.5rem auto;        /* 上下 1.5rem，左右自动居中 */
+}
+
+.kaiti {
+  font-family: 'KaiTi', 'Source Han Serif SC', 'Noto Serif CJK SC', 'STSong', 'SimSun', 'Songti SC', 'NSimSun', 'FangSong', serif;
+}
+
+.kaitiB {
+  font-family: 'Times New Roman', 'KaiTi', 'Source Han Serif SC', 'Noto Serif CJK SC', 'STSong', 'SimSun', 'Songti SC', 'NSimSun', 'FangSong', serif;
+  font-weight: bold;
+}
+
+.comment {
+  text-align:center;
+  margin-top:0.5em;
+  font-style:italic;
 }
 
 @media (max-width: 600px) {
@@ -1052,4 +1006,134 @@ body.dark .nav-icon {
 }
 .article-toc-float a.toc-references::before {
   content: "📚 ";
+}
+
+/* 韦恩图容器 */
+.venn {
+  margin: 1.8rem auto;
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+/* 韦恩图填充颜色（可自定义） */
+.venn svg .venn-circle:nth-child(1) path {
+  fill: var(--c-accent);
+  opacity: 0.25;
+}
+.venn svg .venn-circle:nth-child(2) path {
+  fill: var(--c-gold);
+  opacity: 0.25;
+}
+.venn svg .venn-circle:nth-child(3) path {
+  fill: #6b8e23; /* 第三个颜色，可调 */
+  opacity: 0.25;
+}
+
+/* 深色模式适配 */
+body.dark .venn svg .venn-circle:nth-child(1) path {
+  fill: var(--c-accent);
+}
+body.dark .venn svg .venn-circle:nth-child(2) path {
+  fill: var(--c-gold);
+}
+body.dark .venn svg .venn-circle:nth-child(3) path {
+  fill: #8fbc8f;
+}
+
+.venn svg text {
+  font-family: var(--font-sans) !important;
+}
+
+.venn {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+/* ===== Mermaid 学术风格定制 ===== */
+
+/* 容器居中（已有的话无需重复） */
+.mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.8rem auto;
+  max-width: 100%;
+}
+
+/* ---------- 节点矩形 ---------- */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node polygon,
+.mermaid .node path[d*="M"] {
+  fill: var(--c-bg-soft) !important;
+  stroke: var(--c-accent) !important;
+  stroke-width: 1.5px !important;
+}
+
+/* 节点圆角矩形的圆角 */
+/* .mermaid .node rect {
+  rx: 5 !important;
+  ry: 5 !important;
+} */
+
+/* ---------- 节点文字 ---------- */
+.mermaid .nodeLabel,
+.mermaid .edgeLabel text,
+.mermaid .label text,
+.mermaid .node text {
+  fill: var(--c-text) !important;
+  color: var(--c-text) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+}
+
+/* ---------- 连线 ---------- */
+.mermaid .edgePath path {
+  stroke: var(--c-border) !important;
+  stroke-width: 1.2px !important;
+}
+
+/* 箭头 */
+.mermaid .edgePath marker path {
+  fill: var(--c-border) !important;
+  stroke: var(--c-border) !important;
+}
+
+/* ---------- 思维导图特定样式 ---------- */
+.mermaid .mindmap-node rect {
+  fill: var(--c-bg-soft) !important;
+  stroke: var(--c-accent) !important;
+  stroke-width: 1.5px !important;
+  rx: 6px !important;
+}
+
+.mermaid .mindmap-edge {
+  stroke: var(--c-border) !important;
+  stroke-width: 1.2px !important;
+}
+
+.mermaid .mindmap-node text {
+  fill: var(--c-text) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 13px !important;
+}
+
+/* ---------- 悬停效果 ---------- */
+.mermaid .node:hover rect,
+.mermaid .node:hover circle,
+.mermaid .node:hover polygon,
+.mermaid .mindmap-node:hover rect {
+  fill: var(--c-gold) !important;
+  stroke: var(--c-accent) !important;
+  transition: fill 0.15s;
+}
+
+/* ---------- 图例、标题等 ---------- */
+.mermaid .legend text,
+.mermaid .titleText {
+  fill: var(--c-text) !important;
+  font-family: var(--font-serif) !important;
 }
