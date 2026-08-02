@@ -6,6 +6,13 @@ window.BLOG_ARTICLES = [
     "tags": ["计算机科学", "人工智能"],
     "url": "notes/turing_machine.html"
   },
+    {
+    "title": "效用",
+    "category": "笔记",
+    "date": "2026-08-02",
+    "tags": ["经济学", "微观经济学"],
+    "url": "notes/utility.html"
+  },
   // {
   //   "title": "注意力机制的演变",
   //   "category": "笔记",
