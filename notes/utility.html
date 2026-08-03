@@ -79,7 +79,7 @@
           <h4>替代弹性→∞</h4>
             <P>根据上面的推断，当替代弹性$\to \infty$时，曲线将变得非常平缓，甚至成为了一条直线。下面我们从具体的计算中来验证这一猜想。</P>
             <p>$\sigma \to \infty$$时，$$\rho \to 1$，当$\rho=1$时，$$U(x,y)=\alpha x + \beta y$$
-              正是完全替代时的效用函数，即一条斜率为负的直线，此时，$MRS=\frac{\alpha}{\beta}$。</p>
+              正是完全替代时的效用函数，即一条斜率为负的直线，此时，$MRS=\frac{\alpha}{\beta}$，商品之间可以完全互相替代，比如相同价位不同品牌的牙刷。</p>
           <h4>替代弹性=1</h4>
             <p>$\sigma \to 1$时，$\rho \to 0$
             $$U(x,y)=\lim_{\rho \to 0}(\alpha x^\rho+\beta y^\rho)^\frac{1}{\rho}$$
@@ -90,7 +90,7 @@
             </ul>
             代入$\rho = 0$，得$\ln{U}= \frac{\alpha ln{x}+\beta \ln{y}}{\alpha +\beta}=\ln{x^\alpha y^\beta}$，最终得
             $$U=x^\alpha y^\beta$$
-            因为取对数也是单调变换，所以当$\sigma=1$时，CES效用函数就相当于柯布-道格拉斯效用函数。其边际替代率为$MRS=\frac{U_x}{U_y}=\frac{\alpha y^\beta x^{\alpha-1}}{\beta x^\alpha y^{\beta-1}}=\frac{\alpha}{\beta}\cdot\frac{y}{x}$，替代弹性$\sigma=\frac{d\ln{\frac{y}{x}}}{d\ln(MRS)}=1$，说明边际替代率每变动1个百分点，$y$和$x$的比例也变动1个百分点。</p>
+            因为取对数也是单调变换，所以当$\sigma=1$时，CES效用函数就相当于以上形式的效用函数，这种形式被称为<span class="kaitiB">柯布-道格拉斯效用函数</span>。其边际替代率为$MRS=\frac{U_x}{U_y}=\frac{\alpha y^\beta x^{\alpha-1}}{\beta x^\alpha y^{\beta-1}}=\frac{\alpha}{\beta}\cdot\frac{y}{x}$，替代弹性$\sigma=\frac{d\ln{\frac{y}{x}}}{d\ln(MRS)}=1$，说明边际替代率每变动1个百分点，$y$和$x$的比例也变动1个百分点。</p>
           <h4>替代弹性→0</h4>
             <p>这种情况下要用到CES效用函数的一种变式：
             $$U(x,y)=[(\alpha x)^\rho + (\beta y)^\rho)]^{\frac{1}{\rho}}$$
@@ -100,7 +100,7 @@
               <li>当$X > Y$时，$U(x,y)=\lim_{\rho \to -\infty}[X^\rho(\frac{Y^\rho}{X^\rho}+1)]^{\frac{1}{\rho}}=\lim_{\rho \to -\infty}[X^\rho((\frac{Y}{X})^\rho+1)]^{\frac{1}{\rho}}$，因为$\frac{Y}{X} < 1$，所以$(\frac{Y}{X})^\rho \to +\infty$，因此$U(x,y)=\lim_{\rho \to -\infty}(X^\rho \frac{Y^\rho}{X^\rho})^{\frac{1}{\rho}}=\lim_{\rho \ to -\infty}(Y^\rho) ^{\frac{1}{\rho}}= Y $</li>
             </ul>
             综上:$$\lim_{\rho \to -\infty}U(x,y)=\min(X,Y)=\min(\alpha x, \beta y)$$
-            这正是完全互补时的效用函数。</p>
+            这正是完全互补时的效用函数。这种情况下，商品只能以一定的比例（$\frac{x}{y}=\frac{\beta}{\alpha}$）被消费，比如咖啡和方糖。互补商品不能互相替换。</p>
             
       <h2>齐次性和拟线性效用函数</h2>
         <p>齐次函数是指当所有变量同时加倍时，函数值也相应地加倍的函数。具体来说，如果
