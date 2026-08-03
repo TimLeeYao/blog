@@ -30,8 +30,8 @@
     <div class="article-meta">
       <span class="article-date">2026-08-02</span>
       <div class="article-tags">
-        <a href="../tags.html?tag=tech" class="tag-item small">经济学</a>
-        <a href="../tags.html?tag=tech" class="tag-item small">微观经济学</a>
+        <a href="../tags.html?tag=经济学" class="tag-item small">经济学</a>
+        <a href="../tags.html?tag=微观经济学" class="tag-item small">微观经济学</a>
       </div>
     </div>
 
@@ -148,13 +148,16 @@
         <img width="500" src="notes-images/BudgetConstraint3d.png" title="预算约束条件3D图">
         <p>可以看到投影到曲面上的约束条件直线形成了一条轨迹。约束条件下的效用最大化问题，就变成了求这条轨迹上的最高点的问题，而不是求整个效用函数的最高点的问题。</p>
         <p>先暂时回到二维坐标上，求切点$C$。在切点$C$处，直线与曲线的斜率相同，即$\frac{\mathbf{d}y}{\mathbf{d}x}=-\frac{p_x}{p_y}$，又因为$\frac{\mathbf{d}y}{\mathbf{d}x}=-\frac{U_x}{U_y}$，所以$\frac{U_x}{U_y}=\frac{p_x}{p_y}$，也就是说<span class="kaitiB">两个商品的边际替代率等于它们的价格比</span>。因此，假设$U_x=\lambda p_x$，那么就会有$U_y=\lambda p_y$。</p>
-        <p>另外，又由约束条件可得$I-p_xx-p_yy=0$，所以可以构造函数$$\mathscr{L}=U(x,y)+\lambda(I-p_xx-p_yy)$$。当它的一阶偏导数都为0时有：
-        $$\begin{aligned}
-        \frac{\partial \mathscr{L}}{\partial x} =U_x-\lambda p_x=0 &\Longleftrightarrow U_x=\lambda p_x \\
-        \frac{\partial \mathscr{L}}{\partial y} =U_y-\lambda p_y=0 &\Longleftrightarrow U_y=\lambda p_y \\
-        \frac{\partial \mathscr{L}}{\partial \lambda} =I-p_xx-p_yy=0 &\Longleftrightarrow I=p_xx+p_yy \\
-        \end{aligned}$$
-        因此$\mathscr{L}$取得极值的一阶条件就是直线和无差异曲线相切的条件。$\mathscr{L}$就是拉格朗日函数。</p>
+        <p>另外，又由约束条件可得$I-p_xx-p_yy=0$，所以可以构造函数
+          $$\mathscr{L}=U(x,y)+\lambda(I-p_xx-p_yy)$$
+          当它的一阶偏导数都为0时有：
+          $$\begin{aligned}
+          \frac{\partial \mathscr{L}}{\partial x} =U_x-\lambda p_x=0 &\Longleftrightarrow U_x=\lambda p_x \\
+          \frac{\partial \mathscr{L}}{\partial y} =U_y-\lambda p_y=0 &\Longleftrightarrow U_y=\lambda p_y \\
+          \frac{\partial \mathscr{L}}{\partial \lambda} =I-p_xx-p_yy=0 &\Longleftrightarrow I=p_xx+p_yy \\
+          \end{aligned}$$
+          因此$\mathscr{L}$取得极值的一阶条件就是直线和无差异曲线相切的条件。$\mathscr{L}$就是拉格朗日函数。
+        </p>
         <p>但是要保证一阶条件求得的解确实是局部最优解，即在约束条件下的最大效用，还必须要满足二阶条件：
         $$\begin{cases}
         d^2U < 0 \\
