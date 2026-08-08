@@ -1,0 +1,88 @@
+<mxfile host="65bd71144e">
+    <diagram id="JwwhTq9UNZe0RQZOvRQM" name="Page-1">
+        <mxGraphModel dx="961" dy="569" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="1" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="31" value="" style="group" connectable="0" vertex="1" parent="1">
+                    <mxGeometry x="280" y="150" width="380" height="410" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" style="edgeStyle=none;html=1;" edge="1" parent="31" source="34" target="42">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="$$\mathscr{L}=U(x,y)+\lambda(I-p_xx-p_yy)$$" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="32">
+                    <mxGeometry x="-0.2333" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="34" value="Maximize `U(x,y)`&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;s.t. `I=p_x x+p_yy`&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" vertex="1" parent="31">
+                    <mxGeometry y="30" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="31" source="37" target="48">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="$$\mathscr{L}= E(x,y)+\lambda[\bar{U}-U(x,y)]$$" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="35">
+                    <mxGeometry x="-0.1" y="-1" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="37" value="Minimize `E(x,y)`&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;s.t. `\bar{U}=U(x,y)`&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" vertex="1" parent="31">
+                    <mxGeometry x="320" y="30" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="31" source="42" target="45">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="&lt;font face=&quot;Times New Roman&quot;&gt;Roy&#39;s identity:&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Times New Roman&quot;&gt;\(\frac{\partial V}{\partial p_x}=-\lambda x, \frac{\partial V}{\partial I}=\lambda\)&lt;/font&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="38">
+                    <mxGeometry x="-0.0333" y="-2" relative="1" as="geometry">
+                        <mxPoint x="2" y="-3" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="40" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="31" source="42" target="48">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="Inverses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;" connectable="0" vertex="1" parent="40">
+                    <mxGeometry x="-0.0257" y="-1" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="42" value="Indirect utility function&lt;br&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;`U^\ast=V(p_x,p_y,I)`&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" vertex="1" parent="31">
+                    <mxGeometry y="180" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="31" source="45" target="49">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="Slutsky equation&lt;div&gt;`\frac{\partial x}{\partial p_x}=\frac{\partial x^c}{\partial p_x}+x\frac{\partial x}{\partial I}`&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;" connectable="0" vertex="1" parent="43">
+                    <mxGeometry x="-0.2629" y="3" relative="1" as="geometry">
+                        <mxPoint x="24" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="45" value="Marshallian demand&lt;div&gt;`x(p_x,p_y,I)=-\frac{\frac{\partial V}{\partial p_x}}{\frac{\partial V}{\partial I}}`&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" vertex="1" parent="31">
+                    <mxGeometry y="340" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" style="edgeStyle=none;html=1;" edge="1" parent="31" source="48" target="49">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="&lt;font face=&quot;Times New Roman&quot;&gt;Shephard&#39;s lemma:&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Times New Roman&quot;&gt;\(\frac{dE}{dp_x}=\frac{\partial \mathscr{L}}{\partial p_x}=x^c\)&lt;/font&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="46">
+                    <mxGeometry x="-0.1476" y="-1" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="48" value="Expenditure function&lt;div&gt;`E^\ast=E(p_x,p_y,\bar{U})`&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" vertex="1" parent="31">
+                    <mxGeometry x="320" y="180" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" value="Compensated demand&lt;div&gt;`x^c(p_x,p_y,\bar{U})=\frac{\partial E}{\partial p_x}`&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" vertex="1" parent="31">
+                    <mxGeometry x="320" y="340" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" value="&lt;font face=&quot;Times New Roman&quot;&gt;&lt;b&gt;Primal&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="31">
+                    <mxGeometry x="40" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="&lt;font face=&quot;Times New Roman&quot;&gt;&lt;b&gt;Dual&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="31">
+                    <mxGeometry x="365" width="50" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="52" value="Value functions" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontStyle=2" vertex="1" parent="31">
+                    <mxGeometry x="180" y="160" width="100" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
