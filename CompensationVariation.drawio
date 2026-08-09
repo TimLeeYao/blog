@@ -1,9 +1,138 @@
 <mxfile host="app.diagrams.net">
   <diagram name="第 1 页" id="nuEW1euGO1CixGRoKBND">
-    <mxGraphModel>
+    <mxGraphModel dx="1066" dy="579" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-3" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="280" y="680" as="sourcePoint" />
+            <mxPoint x="640" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-4" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="280" y="680" as="sourcePoint" />
+            <mxPoint x="280" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;Spending on all goods ($)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="80" x="240" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;Quantity of `x`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="80" x="600" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-7" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;rounded=0;strokeWidth=2;fillColor=#f5f5f5;gradientColor=#b3b3b3;strokeColor=#666666;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="280" y="400" as="sourcePoint" />
+            <mxPoint x="400" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-8" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;fillColor=#f5f5f5;gradientColor=#b3b3b3;strokeColor=#666666;strokeWidth=2;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="280" y="480" as="sourcePoint" />
+            <mxPoint x="530" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-9" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;strokeWidth=2;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="280" y="480" as="sourcePoint" />
+            <mxPoint x="370" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-10" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;curved=1;strokeColor=#FF0000;startSize=8;endSize=8;strokeWidth=2;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="336" y="568" />
+            </Array>
+            <mxPoint x="341" y="460" as="sourcePoint" />
+            <mxPoint x="456" y="593" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-12" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="280" y="559" as="sourcePoint" />
+            <mxPoint x="380" y="559" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-13" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;dashPattern=1 2;strokeWidth=1;rounded=0;startSize=3;sourcePerimeterSpacing=4;targetPerimeterSpacing=4;endSize=3;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="322" y="680" as="sourcePoint" />
+            <mxPoint x="322" y="559" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-15" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;dashPattern=1 2;strokeWidth=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="280" y="525" as="sourcePoint" />
+            <mxPoint x="350" y="525" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-18" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="352" y="680" as="sourcePoint" />
+            <mxPoint x="352" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-21" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;curved=1;strokeColor=#FF0000;startSize=8;endSize=8;strokeWidth=2;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="300" y="605" />
+            </Array>
+            <mxPoint x="307" y="472" as="sourcePoint" />
+            <mxPoint x="419" y="615" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-22" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="380" y="680" as="sourcePoint" />
+            <mxPoint x="379" y="558" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-23" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;`y_0`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="16" width="19" x="260" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-25" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;`x_1`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="16" width="30" x="336" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-26" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;`x_2`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="16" width="30" x="306" y="679" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-27" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;`x_0`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="16" width="30" x="365" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-28" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;`y_1`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="16" width="19" x="260" y="517" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-30" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;`E(p_x^0,\cdots,U_0)`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="210" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-31" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;`E(p_x^1,\cdots,U_0)`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="210" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-32" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;`E(p_x^0,\cdots,U_0)`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="520" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-33" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;`E(p_x^1,\cdots,U_0)`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="321" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-34" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;`E(p_x^1,\cdots,U_1)`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="390" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-35" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;`U_0`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="40" x="450" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-36" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;`U_1`&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="40" x="414" y="601" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-39" parent="1" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;" value="" vertex="1">
+          <mxGeometry height="80" width="20" x="179" y="405" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-40" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font face=&quot;Times New Roman&quot;&gt;CV&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="138" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="zEDsRH_UDhn5MjndnFiA-41" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontFamily=Times New Roman;spacing=7;spacingTop=4;" value="&lt;font style=&quot;font-size: 11px;&quot;&gt;书上那幅图的错误有两处：&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;1. 如果纵轴是Spending on other goods，那么纵轴上就不应该出现`E(p_x^0,\cdots,U_0)`以及`E(p_x^0,\cdots,U_0)`，因为函数`E`代表总支出。所以纵轴应该为Spending on all goods，即所有商品的总支出，包括商品`x`。&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;2. 就算纵轴是除`x`以外的其他商品上的支出，即Spending on other goods，那么当商品`x`的价格上升，`x`的需求量从`x_0`减少到`x_2`时，其他商品的价格和需求量应该是保持不变的，所以书上那幅图中的`y_2`应该等于`y_0`。&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;我这幅图改进的地方：&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;1. 纵轴改为Spending on all goods，即所有商品上的花费，也就是总支出&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;2. 当商品`x`价格上升导致需求量从`x_0`减少到`x_2`时，总支出保持不变，仍然是`y_0`，因为这时并没有得到补偿，而且根据效用最大化原则，必须支出所有预算。在得到补偿后，总支出从`y_0`增加到`y_1`，从而能够根据新的商品价格比例，形成新的需求量比例，获得与原来同水平的效用`U_0`&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="210" width="575" x="102" y="100" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
