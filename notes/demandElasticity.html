@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>需求弹性 - 麦田里的阅读者</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-left">
+      <div class="nav-icon">
+        <img src="../images/icon.jpg" alt="站点图标">
+      </div>
+      <a href="../index.html" class="nav-title">麦田里的阅读者</a>
+    </div>
+    <div class="nav-links">
+      <a href="../notes/index.html">笔记</a>
+      <a href="../reports/index.html">报告</a>
+      <a href="../poems/index.html">诗歌</a>
+      <a href="../tags.html">标签</a>
+    </div>
+  </nav>
+
+  <main class="container article">
+    <a href="index.html" class="back-link">← 返回列表</a>
+    <h1 class="article-title">需求弹性</h1>
+    <div class="article-meta">
+      <span class="article-date">2026-08-11</span>
+      <div class="article-tags">
+        <a href="../tags.html?tag=经济学" class="tag-item small">经济学</a>
+        <a href="../tags.html?tag=微观经济学" class="tag-item small">微观经济学</a>
+      </div>
+    </div>
+
+    <!-- 摘要区域 -->
+    <section class="summary">
+      <h2>摘要</h2>
+      <p><!-- 在这里撰写文章摘要 --></p>
+    </section>
+
+    <article class="content">
+      <h2>马歇尔需求弹性</h2>
+        <p>
+          通过比较静态分析可以得出价格对需求量的影响$\frac{\partial x}{\partial p_x}$，但是这个结果会受需求量和价格的单位的影响。为了消除单位的影响，可以使用<span class="kaitiB">需求价格弹性(<i>price elasticity of demand, $e_{x,p_x}$</i>)</span>来表示每百分之一的价格变动会导致百分之几的需求量的变动：
+          $$e_{x,p_x}=\frac{\Delta x/x}{\Delta p_x/p_x}=\frac{\Delta x}{\Delta p_x}\cdot\frac{p_x}{x}=\frac{\partial x(p_x,p_y,I)}{\partial p_x}\cdot\frac{p_x}{x}$$
+          类似的，<span class="kaitiB">需求收入弹性(<i>income elasticity of demand, $e_{x,I}$</i>)</span>表示每百分之一的收入变动会导致百分之几的需求量的变动：
+          $$e_{x,I}=\frac{\Delta x/x}{\Delta I/I}=\frac{\Delta x}{\Delta I}\cdot\frac{I}{x}=\frac{\partial x(p_x,p_y,I)}{\partial I}\cdot\frac{I}{x}$$
+          还有<span class="kaitiB">需求交叉弹性(<i>cross-price elsaticity of demand, $e_{x,p_y}$</i>)</span>表示每百分之一的其他商品的价格变动会导致百分之几的需求量的变动：
+          $$e_{x,p_y}=\frac{\Delta x/x}{\Delta p_y/p_y}=\frac{\Delta x}{\Delta p_y}\cdot\frac{p_y}{x}=\frac{\partial x(p_x,p_y,I)}{\partial p_y}\cdot\frac{p_y}{x}$$
+        </p>
+        <h3>需求价格弹性和总支出</h3>
+          <p>
+            对于一般经济品来说，需求价格弹性是负的，也就是说价格上升往往导致对该商品的需求量的下降。需求价格弹性以-1为基准，等于-1为单位弹性(<i>unit elastic</i>)；大于-1为缺乏弹性(<i>inelastic</i>)；小于-1为具有弹性(<i>elastic</i>)。需求价格弹性的绝对值越大，价格变动导致的需求量的变动就越大，因此也就越具有弹性。
+          </p>
+          <p>
+            需求弹性还能够表示价格变化对总支出的影响：
+            $$\frac{\partial(p_x\cdot x)}{\partial p_x}=p_x\cdot\frac{\partial x}{\partial p_x}+x=x(e_{x,p_x}+1)$$
+            因此，需求价格弹性与-1的关系决定了总支出在价格上的偏导数，也就决定了价格变动对总支出的影响。当需求弹性大于-1时，偏导数结果大于0，支出的变化方向与价格变化方向相同。因为此时，商品缺乏弹性，价格变动对需求量的影响较小，总支出的变化主要反映价格的变化，大部分农产品的价格变化就是这种情况。当需求弹性小于-1时，偏导数结果小于0，支出的变化方向与价格变化方向相反。因为此时，商品具有弹性，需求量的变化大于价格的变化，且与之相反，所以最终支出的变化主要反映需求量的变化。当需求弹性等于-1时，总支出不变，因为价格变化和需求量的变化比例相同，方向相反，互相抵消。综合上面需求价格弹性和-1的比较，可以总结出以下关系：
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>需求价格弹性</th>
+                <th>弹性</th>
+                <th>支出的变化方向</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>$-1 < e_{x,p_x} < 0$</td>
+                <td>缺乏弹性</td>
+                <td>支出的变化方向与价格的变化方向相同</td>
+              </tr>
+              <tr>
+                <td>$e_{x,p_x}=-1$</td>
+                <td>单位弹性</td>
+                <td>支出不变</td>
+              </tr>
+              <tr>
+                <td>$e_{x,p_x} < -1$</td>
+                <td>具有弹性</td>
+                <td>支出的变化方向与价格的变化方向相反</td>
+              </tr>
+            </tbody>
+          </table>
+      <h2>补偿需求弹性</h2>
+        <p>
+          补偿需求量对价格变动的反应也可以用弹性来去除单位的影响。
+          <ul>
+            <li><span class="kaitiB">补偿需求价格弹性(<i>compensated own-price elasticity of demand, $e_{x^c,p_x}$</i>)</span>：$$e_{x^c,p_x}=\frac{\Delta x^c/x^c}{\Delta p_x/p_x}=\frac{\Delta x^c}{\Delta p_x}\cdot\frac{p_x}{x^c}=\frac{\partial x^c(p_x,p_y,I)}{\partial p_x}\cdot\frac{p_x}{x^c}$$</li>
+            <li><span class="kaitiB">补偿需求交叉弹性(<i>compensated cross-price elasticity of demand, $e_{x^c,p_y}$</i>)</span>：$$e_{x^c,p_y}=\frac{\Delta x^c/x}{\Delta p_y/p_y}=\frac{\Delta x^c}{\Delta p_y}\cdot\frac{p_y}{x^c}=\frac{\partial x^c(p_x,p_y,I)}{\partial p_y}\cdot\frac{p_y}{x^c}$$</li>
+          </ul>
+        </p>
+        <p>
+          
+        </p>
+    </article>
+
+    <!-- 参考文献区域 -->
+    <section class="references">
+      <h2>参考文献</h2>
+      <i>
+        <ol>
+          <li><!-- 引用 1 --></li>
+          <li><!-- 引用 2 --></li>
+        </ol>
+      </i>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>联系我</h3>
+        <p>📧 <a href="mailto:timlee20201021@163.com">timlee20201021@163.com</a></p>
+        <p>🔗 <a href="https://github.com/TimLeeYao" target="_blank">GitHub主页</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>扫码直达</h3>
+        <img src="../images/qrcode.jpg" alt="QR Code" class="qr-code">
+      </div>
+    </div>
+    <p class="copyright">© 2025 我的博客</p>
+  </footer>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/article-render.js"></script>
+</body>
+
+</html>
