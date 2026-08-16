@@ -1,0 +1,94 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="第 1 页" id="6ZbQzNjgpBGDsymXECUv">
+    <mxGraphModel dx="1368" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="1" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ZcLXPHnb0qf9igiVSzbD-4" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="430" width="460" x="184" y="369" as="geometry" />
+        </mxCell>
+        <mxCell id="ZcLXPHnb0qf9igiVSzbD-2" edge="1" parent="ZcLXPHnb0qf9igiVSzbD-4" source="zLXZj4puOBHcjqoFn01u-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" target="zLXZj4puOBHcjqoFn01u-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-13" parent="ZcLXPHnb0qf9igiVSzbD-4" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" value="Marshallian demand&lt;div&gt;`x^\ast=x(p_x,p_y,I)=-\frac{\frac{\partial V}{\partial p_x}}{\frac{\partial V}{\partial I}}`&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-8" edge="1" parent="ZcLXPHnb0qf9igiVSzbD-4" source="zLXZj4puOBHcjqoFn01u-12" style="edgeStyle=none;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="zLXZj4puOBHcjqoFn01u-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-9" connectable="0" parent="zLXZj4puOBHcjqoFn01u-8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;font face=&quot;Times New Roman&quot;&gt;Roy&#39;s identity:&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Times New Roman&quot;&gt;\(\frac{\partial V}{\partial p_x}=-\lambda x, \frac{\partial V}{\partial I}=\lambda\)&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0333" y="-2" as="geometry">
+            <mxPoint x="2" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="j4Pitt37HqL3X7b_g2-w-4" edge="1" parent="ZcLXPHnb0qf9igiVSzbD-4" source="zLXZj4puOBHcjqoFn01u-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" target="zLXZj4puOBHcjqoFn01u-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j4Pitt37HqL3X7b_g2-w-5" connectable="0" parent="j4Pitt37HqL3X7b_g2-w-4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;" value="Slutsky equation&lt;div&gt;`\frac{\partial x}{\partial p_x}=\frac{\partial x^c}{\partial p_x}+x\frac{\partial x}{\partial I}`&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.2629" y="3" as="geometry">
+            <mxPoint x="24" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZcLXPHnb0qf9igiVSzbD-3" edge="1" parent="ZcLXPHnb0qf9igiVSzbD-4" source="zLXZj4puOBHcjqoFn01u-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="zLXZj4puOBHcjqoFn01u-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-17" parent="ZcLXPHnb0qf9igiVSzbD-4" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" value="Compensated demand&lt;div&gt;`x^\ast=x^c(p_x,p_y,V)=\frac{\partial E}{\partial p_x}`&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="320" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-14" edge="1" parent="ZcLXPHnb0qf9igiVSzbD-4" source="zLXZj4puOBHcjqoFn01u-16" style="edgeStyle=none;html=1;exitX=0.248;exitY=0.076;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="zLXZj4puOBHcjqoFn01u-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-15" connectable="0" parent="zLXZj4puOBHcjqoFn01u-14" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;font face=&quot;Times New Roman&quot;&gt;Shephard&#39;s lemma:&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Times New Roman&quot;&gt;\(\frac{dE}{dp_x}=\frac{\partial \mathscr{L}}{\partial p_x}=x^c\)&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.1476" y="-1" as="geometry">
+            <mxPoint y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-2" edge="1" parent="ZcLXPHnb0qf9igiVSzbD-4" source="zLXZj4puOBHcjqoFn01u-4" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="zLXZj4puOBHcjqoFn01u-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-3" connectable="0" parent="zLXZj4puOBHcjqoFn01u-2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$\mathscr{L}=U(x,y)+\lambda(I-p_xx-p_yy)$$" vertex="1">
+          <mxGeometry relative="1" x="-0.2333" as="geometry">
+            <mxPoint y="14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-4" parent="ZcLXPHnb0qf9igiVSzbD-4" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" value="Maximize `U(x,y)`&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;s.t. `I=p_x x+p_yy`&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-5" edge="1" parent="ZcLXPHnb0qf9igiVSzbD-4" source="zLXZj4puOBHcjqoFn01u-7" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="zLXZj4puOBHcjqoFn01u-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-6" connectable="0" parent="zLXZj4puOBHcjqoFn01u-5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="$$\mathscr{L}= E(x,y)+\lambda[V-U(x,y)]$$" vertex="1">
+          <mxGeometry relative="1" x="-0.1" y="-1" as="geometry">
+            <mxPoint x="1" y="6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-7" parent="ZcLXPHnb0qf9igiVSzbD-4" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" value="Minimize `E(x,y)`&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;s.t. `V=U(x,y)`&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="320" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-10" edge="1" parent="ZcLXPHnb0qf9igiVSzbD-4" source="zLXZj4puOBHcjqoFn01u-12" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" target="zLXZj4puOBHcjqoFn01u-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-11" connectable="0" parent="zLXZj4puOBHcjqoFn01u-10" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;" value="Inverses" vertex="1">
+          <mxGeometry relative="1" x="-0.0257" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-12" parent="ZcLXPHnb0qf9igiVSzbD-4" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" value="Indirect utility function&lt;br&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;`U^\ast=V(p_x,p_y,I)`&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-16" parent="ZcLXPHnb0qf9igiVSzbD-4" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" value="Expenditure function&lt;div&gt;`E^\ast=E(p_x,p_y,V)`&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="320" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-18" parent="ZcLXPHnb0qf9igiVSzbD-4" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="&lt;font face=&quot;Times New Roman&quot;&gt;&lt;b&gt;Primal&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-19" parent="ZcLXPHnb0qf9igiVSzbD-4" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="&lt;font face=&quot;Times New Roman&quot;&gt;&lt;b&gt;Dual&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="50" x="365" as="geometry" />
+        </mxCell>
+        <mxCell id="zLXZj4puOBHcjqoFn01u-20" parent="ZcLXPHnb0qf9igiVSzbD-4" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Times New Roman;fontStyle=2" value="Value functions" vertex="1">
+          <mxGeometry height="30" width="100" x="180" y="360" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
